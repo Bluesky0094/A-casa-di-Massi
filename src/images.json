@@ -1,0 +1,327 @@
+{
+  "casa": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07944.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 39710
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 105270
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 217888
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 461152
+      }
+    ]
+  },
+  "cucina": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07885.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 27706
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 61672
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 114670
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 217974
+      }
+    ]
+  },
+  "camera": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07910.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 24150
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 60888
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 119456
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 235904
+      }
+    ]
+  },
+  "cortile": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07932.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 46350
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 112130
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 218406
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 416894
+      }
+    ]
+  },
+  "dettagli": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07890.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 16006
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 35362
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 64582
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 125814
+      }
+    ]
+  },
+  "pane": {
+    "source": "sources/Casa di Massi/Foto evento/_DSC7907.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 22240
+      },
+      {
+        "width": 800,
+        "height": 533,
+        "bytes": 44350
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 75030
+      },
+      {
+        "width": 1800,
+        "height": 1200,
+        "bytes": 139646
+      }
+    ]
+  },
+  "amaca": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07950.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 55658
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 153390
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 335380
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 730810
+      }
+    ]
+  },
+  "orto": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07997.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 54704
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 140488
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 287006
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 574262
+      }
+    ]
+  },
+  "bici": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07964.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 35806
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 90390
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 186686
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 382248
+      }
+    ]
+  },
+  "campagna": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07955.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 44832
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 122234
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 267468
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 585762
+      }
+    ]
+  },
+  "pietra": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07973.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 31880
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 79638
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 159408
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 332214
+      }
+    ]
+  },
+  "bagno": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07913-HDR.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 14208
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 30544
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 53710
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 101184
+      }
+    ]
+  },
+  "soppalco": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07904.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 25550
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 56168
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 103016
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 189410
+      }
+    ]
+  }
+}
