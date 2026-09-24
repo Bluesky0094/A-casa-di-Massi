@@ -41,13 +41,13 @@ Ogni immagine ha versioni da 480, 800, 1200 e 1800 pixel. Il browser sceglie tra
 | bagno | DSC07913-HDR.jpg | Galleria |
 | soppalco | DSC07904.jpg | Galleria |
 
-## Prima della pubblicazione
+## Pubblicazione su GitHub Pages — 25 settembre 2026
 
-Il sito non è pubblicato e nessun dominio è collegato. `noindex, nofollow` e `robots.txt` impediscono l’indicizzazione ordinaria di questa anteprima, senza costituire un controllo di accesso.
+Pubblicazione autorizzata dall’utente su `https://bluesky0094.github.io/A-casa-di-Massi/`, senza dominio personalizzato. Il workflow `.github/workflows/pages.yml` verifica e pubblica solo `dist/` a ogni push su `main`.
 
-Prima del rilascio occorre scegliere dominio e hosting, confermare i dati del titolare da riportare nell’informativa privacy e adeguarla al servizio di hosting effettivo (eventuali log). L’informativa attuale descrive solo il comportamento tecnico della versione statica e non sostituisce quei dati. Si dovranno inoltre impostare URL canonici, URL assoluti delle lingue e immagine social sul dominio definitivo, rimuovendo il blocco di indicizzazione solo quando autorizzati a pubblicare.
+`SITE_URL` determina percorso base e URL assoluti. La build pubblica abilita l’indicizzazione delle sei pagine di contenuto, genera sitemap, canonical, alternate e immagine social; la 404 resta esclusa. Senza questa variabile, la versione locale resta non indicizzabile. Link, immagini responsive, galleria e font supportano il sottopercorso del repository.
 
-Disponibilità, prezzi, regole e messaggi rimangono su Airbnb, senza essere duplicati sul sito. Nessun nuovo chiarimento è necessario per usare la versione locale.
+L’informativa nelle tre lingue descrive GitHub Pages, la registrazione degli IP per sicurezza e rimanda alla privacy di GitHub. I dati completi del titolare non sono stati forniti e non vengono inventati: restano da completare nell’informativa. Disponibilità, prezzi, regole e messaggi rimangono su Airbnb.
 
 ## Citazione di Massi sul pane — 25 settembre 2026
 
