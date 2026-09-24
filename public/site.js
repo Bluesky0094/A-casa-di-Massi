@@ -41,7 +41,7 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
     index = (next + keys.length) % keys.length;
     const key = keys[index];
     image.alt = gallery.photos[key].alt;
-    image.src = `/images/${key}-1800.webp`;
+    image.src = gallery.photos[key].src;
     dialog.querySelector('[data-caption]').textContent = gallery.photos[key].caption;
     dialog.querySelector('[data-counter]').textContent = `${index + 1} ${gallery.of} ${keys.length}`;
   }

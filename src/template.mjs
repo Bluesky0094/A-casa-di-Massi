@@ -1,4 +1,5 @@
 import { content, languages } from './content.mjs';
+import { siteUrl, sitePath, absoluteUrl } from './site.mjs';
 
 export const bookingUrl = 'https://www.airbnb.it/rooms/1175206454292232540';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Via%20Calanchi%2078%2C%20Frigintini%2C%20Modica%2C%20Italia';
@@ -21,19 +22,19 @@ const icons = {
 const icon = (name, className = '') => `<svg class="icon ${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]}</svg>`;
 
 function photo(key, t, { hero = false, sizes = '(min-width: 900px) 50vw, 100vw', className = '' } = {}) {
-  return `<img class="${className}" src="/images/${key}-800.webp" srcset="${[480, 800, 1200, 1800].map(w => `/images/${key}-${w}.webp ${w}w`).join(', ')}" sizes="${sizes}" width="1800" height="1201" alt="${escape(t.alt[key])}" ${hero ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
+  return `<img class="${className}" src="${sitePath(`/images/${key}-800.webp`)}" srcset="${[480, 800, 1200, 1800].map(w => `${sitePath(`/images/${key}-${w}.webp`)} ${w}w`).join(', ')}" sizes="${sizes}" width="1800" height="1201" alt="${escape(t.alt[key])}" ${hero ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
 }
 function photoLink(key, t, options) {
-  return `<a class="photo-link" href="/images/${key}-1800.webp" data-photo="${key}" aria-label="${escape(`${t.photoOpen} ${t.captions[key]}`)}">${photo(key, t, options)}</a>`;
+  return `<a class="photo-link" href="${sitePath(`/images/${key}-1800.webp`)}" data-photo="${key}" aria-label="${escape(`${t.photoOpen} ${t.captions[key]}`)}">${photo(key, t, options)}</a>`;
 }
 function externalLink(url, label, t, className = '') {
   return `<a class="${className}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(label)}${icon('diagonal')}<span class="sr-only"> (${t.external})</span></a>`;
 }
 function languageNav(lang, t, page = '') {
-  return `<nav class="languages" aria-label="${t.language}">${Object.entries(languages).map(([code, data]) => `<a href="${data.path}${page}" lang="${code}" hreflang="${code}" aria-label="${data.name}" ${lang === code ? 'aria-current="page"' : ''} data-language>${code.toUpperCase()}</a>`).join('')}</nav>`;
+  return `<nav class="languages" aria-label="${t.language}">${Object.entries(languages).map(([code, data]) => `<a href="${sitePath(data.path + page)}" lang="${code}" hreflang="${code}" aria-label="${data.name}" ${lang === code ? 'aria-current="page"' : ''} data-language>${code.toUpperCase()}</a>`).join('')}</nav>`;
 }
 function header(lang, t, home = true) {
-  const route = languages[lang].path;
+  const route = sitePath(languages[lang].path);
   const nav = ids.map((id, i) => `<a href="${home ? '' : route}#${id}">${t.nav[i]}</a>`).join('');
   return `<header class="header" id="inizio">
     <a class="wordmark" href="${route}" aria-label="A casa di Massi — ${lang === 'it' ? 'pagina iniziale' : lang === 'es' ? 'inicio' : 'home'}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a>
@@ -45,22 +46,23 @@ function header(lang, t, home = true) {
 }
 
 function footer(lang, t) {
-  return `<footer class="footer"><div class="footer-main"><a class="wordmark" href="${languages[lang].path}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a><p>${t.footer}</p><a class="back-top" href="#inizio">${t.top}${icon('down')}</a></div><div class="footer-bottom"><span>© 2026 A casa di Massi</span><span>Frigintini · Modica · ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>CIN IT088006C2S3KDESX8</span><a href="${languages[lang].path}privacy/">${t.privacy}</a></div></footer>`;
+  return `<footer class="footer"><div class="footer-main"><a class="wordmark" href="${sitePath(languages[lang].path)}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a><p>${t.footer}</p><a class="back-top" href="#inizio">${t.top}${icon('down')}</a></div><div class="footer-bottom"><span>© 2026 A casa di Massi</span><span>Frigintini · Modica · ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>CIN IT088006C2S3KDESX8</span><a href="${sitePath(languages[lang].path + 'privacy/')}">${t.privacy}</a></div></footer>`;
 }
 
-function shell(lang, body, { css, js, page = '', title, description } = {}) {
+function shell(lang, body, { css, js, page = '', title, description, notFound = false } = {}) {
   const t = content[lang];
   return `<!doctype html>
-<html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#15565b"><meta name="robots" content="noindex, nofollow"><title>${escape(title || t.title)}</title><meta name="description" content="${escape(description || t.description)}">
+<html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#15565b"><meta name="robots" content="${siteUrl && !notFound ? 'index, follow' : 'noindex, nofollow'}"><title>${escape(title || t.title)}</title><meta name="description" content="${escape(description || t.description)}">
 <meta property="og:type" content="website"><meta property="og:title" content="${escape(title || t.title)}"><meta property="og:description" content="${escape(description || t.description)}"><meta property="og:locale" content="${{ it: 'it_IT', en: 'en_GB', es: 'es_ES' }[lang]}">
-${Object.entries(languages).map(([code, data]) => `<link rel="alternate" hreflang="${code}" href="${data.path}${page}">`).join('')}<link rel="alternate" hreflang="x-default" href="/${page}">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css?v=${css}"><script src="/site.js?v=${js}" defer></script></head>
+${!notFound ? Object.entries(languages).map(([code, data]) => `<link rel="alternate" hreflang="${code}" href="${absoluteUrl(data.path + page)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${absoluteUrl('/' + page)}">` : ''}
+${siteUrl && !notFound ? `<link rel="canonical" href="${absoluteUrl(languages[lang].path + page)}"><meta property="og:url" content="${absoluteUrl(languages[lang].path + page)}"><meta property="og:image" content="${absoluteUrl('/images/casa-1200.webp')}"><meta property="og:image:alt" content="${escape(t.alt.casa)}">` : ''}
+<link rel="icon" type="image/svg+xml" href="${sitePath('/favicon.svg')}"><link rel="preload" href="${sitePath('/fonts/dm-sans.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="${sitePath('/styles.css')}?v=${css}"><script src="${sitePath('/site.js')}?v=${js}" defer></script></head>
 <body><a class="skip-link" href="#main">${t.skip}</a>${body}</body></html>`;
 }
 
 export function renderHome(lang, versions) {
   const t = content[lang];
-  const galleryData = Object.fromEntries(galleryPhotos.map(key => [key, { alt: t.alt[key], caption: t.captions[key] }]));
+  const galleryData = Object.fromEntries(galleryPhotos.map(key => [key, { alt: t.alt[key], caption: t.captions[key], src: sitePath(`/images/${key}-1800.webp`) }]));
   return shell(lang, `${header(lang, t)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
@@ -84,9 +86,9 @@ export function renderHome(lang, versions) {
 
 export function renderPrivacy(lang, versions) {
   const t = content[lang];
-  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${t.privacyText}</p><a class="text-link" href="${languages[lang].path}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi` });
+  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${t.privacyText}</p><p>${externalLink('https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement', 'GitHub General Privacy Statement', t, 'text-link')}</p><a class="text-link" href="${sitePath(languages[lang].path)}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi` });
 }
 
 export function render404(versions) {
-  return shell('it', `<main class="text-page section-width" id="main"><a class="wordmark" id="inizio" href="/">a casa di <span>Massi.</span></a><p class="eyebrow">404</p><h1>Questa pagina non è di casa.</h1><div class="error-languages">${Object.keys(languages).map(lang => `<p lang="${lang}">${lang === 'it' ? '' : `${content[lang].notFound}<br>`}<a class="text-link" href="${languages[lang].path}">${content[lang].backHome}${icon('arrow')}</a></p>`).join('')}</div></main>`, { ...versions, title: '404 — A casa di Massi' });
+  return shell('it', `<main class="text-page section-width" id="main"><a class="wordmark" id="inizio" href="${sitePath('/')}">a casa di <span>Massi.</span></a><p class="eyebrow">404</p><h1>Questa pagina non è di casa.</h1><div class="error-languages">${Object.keys(languages).map(lang => `<p lang="${lang}">${lang === 'it' ? '' : `${content[lang].notFound}<br>`}<a class="text-link" href="${sitePath(languages[lang].path)}">${content[lang].backHome}${icon('arrow')}</a></p>`).join('')}</div></main>`, { ...versions, title: '404 — A casa di Massi', notFound: true });
 }

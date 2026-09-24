@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { siteUrl, absoluteUrl } from '../src/site.mjs';
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export async function build() {
@@ -23,6 +24,12 @@ export async function build() {
     await writeFile(resolve(directory, 'privacy/index.html'), renderPrivacy(lang, versions));
   }
   await writeFile(resolve(dist, '404.html'), render404(versions));
+  await writeFile(resolve(dist, '.nojekyll'), '');
+  if (siteUrl) {
+    const routes = Object.values(languages).flatMap(({ path }) => [path, `${path}privacy/`]);
+    await writeFile(resolve(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${absoluteUrl('/sitemap.xml')}\n`);
+    await writeFile(resolve(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(path => `<url><loc>${absoluteUrl(path)}</loc></url>`).join('')}</urlset>\n`);
+  }
   console.log('Build completata: IT / EN / ES + privacy + 404 → dist/');
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await build();

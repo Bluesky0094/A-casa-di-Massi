@@ -48,7 +48,7 @@ export const content = {
     airbnb: 'La casa su Airbnb', external: 'si apre in una nuova scheda',
     closing: 'Ci vediamo\nin Sicilia.',
     footer: 'Una casa. Una storia. Un po’ di Sicilia.', top: 'Torna su', privacy: 'Privacy',
-    privacyTitle: 'Navigare con semplicità', privacyText: 'Questo sito non usa cookie, strumenti di analisi, moduli o contenuti esterni incorporati. Le foto e i caratteri sono serviti dal sito stesso. I link a Google Maps e Airbnb aprono siti esterni, soggetti alle rispettive informative. Il servizio che ospita il sito può registrare dati tecnici necessari alla navigazione.', close: 'Chiudi',
+    privacyTitle: 'Navigare con semplicità', privacyText: 'Questo sito non usa cookie, strumenti di analisi, moduli o contenuti esterni incorporati. Le foto e i caratteri sono serviti dal sito stesso. I link a Google Maps e Airbnb aprono siti esterni, soggetti alle rispettive informative. Il sito è ospitato su GitHub Pages: GitHub registra gli indirizzi IP dei visitatori per motivi di sicurezza.', close: 'Chiudi',
     notFound: 'Questa pagina non è di casa.', backHome: 'Torna alla casa',
   },
   en: {
@@ -91,7 +91,7 @@ export const content = {
     airbnb: 'Find the house on Airbnb', external: 'opens in a new tab',
     closing: 'See you\nin Sicily.',
     footer: 'A house. A story. A little Sicily.', top: 'Back to top', privacy: 'Privacy',
-    privacyTitle: 'A simple way to browse', privacyText: 'This site uses no cookies, analytics, forms or embedded third-party content. Photos and fonts are served by the site itself. Links to Google Maps and Airbnb open external websites, which have their own privacy policies. The hosting provider may record technical data needed to serve the website.', close: 'Close',
+    privacyTitle: 'A simple way to browse', privacyText: 'This site uses no cookies, analytics, forms or embedded third-party content. Photos and fonts are served by the site itself. Links to Google Maps and Airbnb open external websites, which have their own privacy policies. This site is hosted on GitHub Pages: GitHub logs visitor IP addresses for security purposes.', close: 'Close',
     notFound: 'This page isn’t at home.', backHome: 'Back to the house',
   },
   es: {
@@ -133,7 +133,7 @@ export const content = {
     airbnb: 'La casa en Airbnb', external: 'se abre en una pestaña nueva',
     closing: 'Nos vemos\nen Sicilia.',
     footer: 'Una casa. Una historia. Un poco de Sicilia.', top: 'Volver arriba', privacy: 'Privacidad',
-    privacyTitle: 'Navegar con sencillez', privacyText: 'Este sitio no utiliza cookies, herramientas de análisis, formularios ni contenido externo incrustado. Las fotos y las fuentes se sirven desde el propio sitio. Los enlaces a Google Maps y Airbnb abren sitios externos con sus propias políticas de privacidad. El proveedor de alojamiento puede registrar los datos técnicos necesarios para la navegación.', close: 'Cerrar',
+    privacyTitle: 'Navegar con sencillez', privacyText: 'Este sitio no utiliza cookies, herramientas de análisis, formularios ni contenido externo incrustado. Las fotos y las fuentes se sirven desde el propio sitio. Los enlaces a Google Maps y Airbnb abren sitios externos con sus propias políticas de privacidad. Este sitio está alojado en GitHub Pages: GitHub registra las direcciones IP de los visitantes por motivos de seguridad.', close: 'Cerrar',
     notFound: 'Esta página no está en casa.', backHome: 'Volver a la casa',
   },
 };
