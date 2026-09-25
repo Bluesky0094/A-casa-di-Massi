@@ -94,7 +94,7 @@ figcaption>span:first-child{font-size:12px}
 .more-photos{margin-top:31px}
 .more-photos summary{list-style:none;display:flex;align-items:center;gap:15px;min-height:52px;width:fit-content;font-size:14px;border-bottom:1px solid var(--ink);padding-block:10px}
 .more-photos summary::-webkit-details-marker{display:none}
-.gallery-count{font-size:12px;align-self:flex-start}
+.gallery-count{font-size:12px}
 .more-photos summary>.icon{margin-left:24px;width:18px}
 .more-photos[open] summary>.icon{transform:rotate(45deg)}
 .gallery-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 20px;padding-top:30px}
