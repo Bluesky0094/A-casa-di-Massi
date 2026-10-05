@@ -323,5 +323,80 @@
         "bytes": 189410
       }
     ]
+  },
+  "forno": {
+    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.38.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 854,
+        "bytes": 53248
+      },
+      {
+        "width": 800,
+        "height": 1423,
+        "bytes": 104464
+      },
+      {
+        "width": 1200,
+        "height": 2135,
+        "bytes": 168902
+      },
+      {
+        "width": 1800,
+        "height": 3202,
+        "bytes": 270636
+      }
+    ]
+  },
+  "impasto": {
+    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.40.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 854,
+        "bytes": 61676
+      },
+      {
+        "width": 800,
+        "height": 1423,
+        "bytes": 153488
+      },
+      {
+        "width": 1200,
+        "height": 2135,
+        "bytes": 260152
+      },
+      {
+        "width": 1800,
+        "height": 3202,
+        "bytes": 418030
+      }
+    ]
+  },
+  "lievitazione": {
+    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.41.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 270,
+        "bytes": 26084
+      },
+      {
+        "width": 800,
+        "height": 450,
+        "bytes": 56278
+      },
+      {
+        "width": 1200,
+        "height": 675,
+        "bytes": 120192
+      },
+      {
+        "width": 1800,
+        "height": 1012,
+        "bytes": 214180
+      }
+    ]
   }
 }
