@@ -72,6 +72,8 @@ html[lang=en] .hero h1{font-size:clamp(44px,4.2vw,62px)}
 .intro h2{font-size:clamp(31px,3vw,46px);line-height:1.14;letter-spacing:-.035em;margin-top:22px}
 .intro>p{font-size:16px;color:var(--muted);max-width:430px}
 .section-heading{display:grid;grid-template-columns:1fr 1fr;gap:10%;align-items:end;margin-bottom:42px}
+.house .section-heading{align-items:start}
+.house>.eyebrow{margin-bottom:21px}
 .section-heading .eyebrow{margin-bottom:21px}
 .section-description{color:var(--muted);font-size:16px;max-width:500px}
 .facts{display:flex;gap:20px;flex-wrap:wrap;margin-top:29px;color:var(--ink)}
