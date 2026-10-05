@@ -1,4 +1,5 @@
 import { content, languages } from './content.mjs';
+import images from './images.json' with { type: 'json' };
 import { siteUrl, sitePath, absoluteUrl } from './site.mjs';
 
 export const bookingUrl = 'https://www.airbnb.it/rooms/1175206454292232540';
@@ -22,7 +23,7 @@ const icons = {
 const icon = (name, className = '') => `<svg class="icon ${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]}</svg>`;
 
 function photo(key, t, { hero = false, sizes = '(min-width: 900px) 50vw, 100vw', className = '' } = {}) {
-  return `<img class="${className}" src="${sitePath(`/images/${key}-800.webp`)}" srcset="${[480, 800, 1200, 1800].map(w => `${sitePath(`/images/${key}-${w}.webp`)} ${w}w`).join(', ')}" sizes="${sizes}" width="1800" height="1201" alt="${escape(t.alt[key])}" ${hero ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
+  return `<img class="${className}" src="${sitePath(`/images/${key}-800.webp`)}" srcset="${[480, 800, 1200, 1800].map(w => `${sitePath(`/images/${key}-${w}.webp`)} ${w}w`).join(', ')}" sizes="${sizes}" width="${images[key].variants.at(-1).width}" height="${images[key].variants.at(-1).height}" alt="${escape(t.alt[key])}" ${hero ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
 }
 function photoLink(key, t, options) {
   return `<a class="photo-link" href="${sitePath(`/images/${key}-1800.webp`)}" data-photo="${key}" aria-label="${escape(`${t.photoOpen} ${t.captions[key]}`)}">${photo(key, t, options)}</a>`;
@@ -76,7 +77,16 @@ export function renderHome(lang, versions) {
     <details class="more-photos"><summary>${t.gallery}<span class="gallery-count">08</span>${icon('plus')}</summary><div class="gallery-grid" aria-label="${t.galleryLabel}">${galleryPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 25vw, 50vw' })}<figcaption>${t.captions[key]}</figcaption></figure>`).join('')}</div></details>
   </section>
   <section class="life section-space" id="vita" aria-labelledby="life-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">${t.lifeLabel}</p><h2 id="life-title">${lines(t.lifeTitle)}</h2></div><p class="section-description">${t.lifeText}</p></div><div class="life-grid">${t.lifeCards.map((card, i) => `<article><figure>${photo(card.image, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}</figure><h3>${card.title}</h3><p>${card.text}</p></article>`).join('')}</div><div class="host"><div class="host-heading"><span class="host-sun">${icon('sun')}</span><div><p class="eyebrow">${t.hostLabel}</p><h3>${lines(t.hostTitle)}</h3></div></div><p>${t.hostText}</p></div></div></section>
-  <section class="memory section-width section-space" aria-labelledby="memory-title"><div class="memory-photos"><figure class="memory-tall">${photo('pietra', t, { sizes: '(min-width: 700px) 33vw, 65vw' })}</figure><figure class="memory-small">${photo('pane', t, { sizes: '(min-width: 700px) 22vw, 40vw' })}</figure></div><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div></section>
+  <section class="family-memory section-width section-space" aria-labelledby="memory-title">
+    <div class="memory-workbench">
+      <figure class="memory-making">${photo('impasto', t, { sizes: '(min-width: 700px) 32vw, 60vw' })}<figcaption>${escape(t.captions.impasto)}</figcaption></figure>
+      <figure class="memory-oven">${photo('forno', t, { sizes: '(min-width: 700px) 19vw, 35vw' })}<figcaption>${escape(t.captions.forno)}</figcaption></figure>
+      <figure class="memory-dough">${photo('lievitazione', t, { sizes: '(min-width: 700px) 30vw, 65vw' })}<figcaption>${escape(t.captions.lievitazione)}</figcaption></figure>
+    </div>
+    <div class="memory-narrative"><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div>
+      <div class="memory-keepsakes"><figure class="memory-house">${photo('pietra', t, { sizes: '(min-width: 700px) 24vw, 60vw' })}</figure><figure class="memory-bread">${photo('pane', t, { sizes: '(min-width: 700px) 18vw, 40vw' })}</figure></div>
+    </div>
+  </section>
   <section class="territory section-width section-space" id="territorio" aria-labelledby="territory-title"><div class="section-heading"><div><p class="eyebrow">${t.territoryLabel}</p><h2 id="territory-title">${lines(t.territoryTitle)}</h2></div><div class="section-description"><p>${t.territoryText}</p><ul class="territory-tags">${t.territoryTags.map(tag => `<li>${tag}</li>`).join('')}</ul></div></div><figure class="landscape">${photo('campagna', t, { sizes: '100vw' })}<figcaption>${icon('pin')}${t.captions.campagna} · Frigintini</figcaption></figure></section>
   <section class="location section-space" id="dove" aria-labelledby="location-title"><div class="section-width"><p class="eyebrow">${t.locationLabel}</p><div class="location-layout"><div><h2 id="location-title">${lines(t.locationTitle)}</h2><div class="location-address"><span class="eyebrow">${t.addressLabel}</span><address>${t.address.map(escape).join('<br>')}</address>${externalLink(mapUrl, t.map, t, 'text-link')}</div></div><div class="stay"><span class="eyebrow">${t.stayLabel}</span><h3>A casa di Massi</h3><p>${t.stayText}</p>${externalLink(bookingUrl, t.airbnb, t, 'button button-dark')}<span class="stay-detail">${t.facts[1][1]} <span aria-hidden="true">·</span> ${t.facts[0][1]}</span></div></div></div></section>
   <div class="closing"><span class="closing-sun" aria-hidden="true">${icon('sun')}</span><p>${lines(t.closing)}</p></div>

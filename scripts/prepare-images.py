@@ -6,6 +6,7 @@ No colour grading, retouching, compositing or generative changes are applied.
 from pathlib import Path
 from PIL import Image, ImageOps
 import json
+import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "sources/Casa di Massi/Foto casa"
@@ -18,6 +19,9 @@ SELECTION = {
     "camera": "DSC07910.jpg",
     "cortile": "DSC07932.jpg",
     "dettagli": "DSC07890.jpg",
+    "forno": "WhatsApp Image 2025-04-18 at 17.09.38.jpg",
+    "impasto": "WhatsApp Image 2025-04-18 at 17.09.40.jpg",
+    "lievitazione": "WhatsApp Image 2025-04-18 at 17.09.41.jpg",
     "pane": "../Foto evento/_DSC7907.jpg",
     "amaca": "DSC07950.jpg",
     "orto": "DSC07997.jpg",
@@ -28,8 +32,14 @@ SELECTION = {
     "soppalco": "DSC07904.jpg",
 }
 
-manifest = {}
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--only", nargs="+", choices=SELECTION, help="Generate only the selected images")
+args = parser.parse_args()
+manifest_path = ROOT / "src/images.json"
+manifest = json.loads(manifest_path.read_text()) if args.only else {}
 for name, source in SELECTION.items():
+    if args.only and name not in args.only:
+        continue
     with Image.open(SOURCE / source) as original:
         photo = ImageOps.exif_transpose(original).convert("RGB")
         variants = []
