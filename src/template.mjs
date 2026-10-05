@@ -72,7 +72,8 @@ export function renderHome(lang, versions) {
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>
   <section class="house section-width section-space" id="casa" aria-labelledby="house-title">
-    <div class="section-heading"><div><p class="eyebrow">${t.houseLabel}</p><h2 id="house-title">${lines(t.houseTitle)}</h2></div><div class="section-description"><p>${t.houseText}</p><ul class="facts">${t.facts.map(([symbol, text]) => `<li>${icon(symbol)}<span>${text}</span></li>`).join('')}</ul></div></div>
+    <p class="eyebrow">${t.houseLabel}</p>
+    <div class="section-heading"><div><h2 id="house-title">${lines(t.houseTitle)}</h2><ul class="facts">${t.facts.map(([symbol, text]) => `<li>${icon(symbol)}<span>${text}</span></li>`).join('')}</ul></div><p class="section-description">${t.houseText}</p></div>
     <div class="house-mosaic"><figure class="mosaic-main">${photoLink('cucina', t, { sizes: '(min-width: 700px) 60vw, 100vw' })}<figcaption><span>01</span>${t.captions.cucina}</figcaption></figure><figure>${photoLink('camera', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>02</span>${t.captions.camera}</figcaption></figure><figure>${photoLink('cortile', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>03</span>${t.captions.cortile}</figcaption></figure></div>
     <details class="more-photos"><summary>${t.gallery}<span class="gallery-count">08</span>${icon('plus')}</summary><div class="gallery-grid" aria-label="${t.galleryLabel}">${galleryPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 25vw, 50vw' })}<figcaption>${t.captions[key]}</figcaption></figure>`).join('')}</div></details>
   </section>

@@ -18,7 +18,7 @@ SELECTION = {
     "cucina": "DSC07885.jpg",
     "camera": "DSC07910.jpg",
     "cortile": "DSC07932.jpg",
-    "dettagli": "DSC07890.jpg",
+    "dettagli": "DSC07937.jpg",
     "forno": "WhatsApp Image 2025-04-18 at 17.09.38.jpg",
     "impasto": "WhatsApp Image 2025-04-18 at 17.09.40.jpg",
     "lievitazione": "WhatsApp Image 2025-04-18 at 17.09.41.jpg",

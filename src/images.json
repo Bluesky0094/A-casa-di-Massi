@@ -100,27 +100,27 @@
     ]
   },
   "dettagli": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07890.jpg",
+    "source": "sources/Casa di Massi/Foto casa/DSC07937.jpg",
     "variants": [
       {
         "width": 480,
         "height": 320,
-        "bytes": 16006
+        "bytes": 43574
       },
       {
         "width": 800,
         "height": 534,
-        "bytes": 35362
+        "bytes": 106682
       },
       {
         "width": 1200,
         "height": 800,
-        "bytes": 64582
+        "bytes": 209880
       },
       {
         "width": 1800,
         "height": 1201,
-        "bytes": 125814
+        "bytes": 415110
       }
     ]
   },
