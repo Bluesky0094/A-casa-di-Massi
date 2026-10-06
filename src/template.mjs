@@ -5,7 +5,9 @@ import { siteUrl, sitePath, absoluteUrl } from './site.mjs';
 export const bookingUrl = 'https://www.airbnb.it/rooms/1175206454292232540';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Via%20Calanchi%2078%2C%20Frigintini%2C%20Modica%2C%20Italia';
 const ids = ['casa', 'vita', 'territorio', 'dove'];
-const galleryPhotos = ['cucina', 'camera', 'cortile', 'soppalco', 'bagno', 'casa', 'amaca', 'orto'];
+const houseDetails = ['cucina-ampia', 'limoni', 'erbe'];
+const outdoorPhotos = ['tavola', 'amaca', 'giardino', 'esterno'];
+const galleryPhotos = ['cucina', 'camera', 'cortile', 'soppalco', 'bagno', 'casa', 'amaca', 'orto', ...houseDetails];
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const lines = (value) => escape(value).replaceAll('\n', '<br>');
 
@@ -56,28 +58,29 @@ function shell(lang, body, { css, js, page = '', title, description, notFound = 
 <html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#15565b"><meta name="robots" content="${siteUrl && !notFound ? 'index, follow' : 'noindex, nofollow'}"><title>${escape(title || t.title)}</title><meta name="description" content="${escape(description || t.description)}">
 <meta property="og:type" content="website"><meta property="og:title" content="${escape(title || t.title)}"><meta property="og:description" content="${escape(description || t.description)}"><meta property="og:locale" content="${{ it: 'it_IT', en: 'en_GB', es: 'es_ES' }[lang]}">
 ${!notFound ? Object.entries(languages).map(([code, data]) => `<link rel="alternate" hreflang="${code}" href="${absoluteUrl(data.path + page)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${absoluteUrl('/' + page)}">` : ''}
-${siteUrl && !notFound ? `<link rel="canonical" href="${absoluteUrl(languages[lang].path + page)}"><meta property="og:url" content="${absoluteUrl(languages[lang].path + page)}"><meta property="og:image" content="${absoluteUrl('/images/casa-1200.webp')}"><meta property="og:image:alt" content="${escape(t.alt.casa)}">` : ''}
+${siteUrl && !notFound ? `<link rel="canonical" href="${absoluteUrl(languages[lang].path + page)}"><meta property="og:url" content="${absoluteUrl(languages[lang].path + page)}"><meta property="og:image" content="${absoluteUrl('/images/apertura-1200.webp')}"><meta property="og:image:alt" content="${escape(t.alt.apertura)}">` : ''}
 <link rel="icon" type="image/svg+xml" href="${sitePath('/favicon.svg')}"><link rel="preload" href="${sitePath('/fonts/dm-sans.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="${sitePath('/styles.css')}?v=${css}"><script src="${sitePath('/site.js')}?v=${js}" defer></script></head>
 <body><a class="skip-link" href="#main">${t.skip}</a>${body}</body></html>`;
 }
 
 export function renderHome(lang, versions) {
   const t = content[lang];
-  const galleryData = Object.fromEntries(galleryPhotos.map(key => [key, { alt: t.alt[key], caption: t.captions[key], src: sitePath(`/images/${key}-1800.webp`) }]));
+  const galleryData = Object.fromEntries([...new Set([...galleryPhotos, ...outdoorPhotos, ...t.lifeCards.map(card => card.image)])].map(key => [key, { alt: t.alt[key], caption: t.captions[key], src: sitePath(`/images/${key}-1800.webp`) }]));
   return shell(lang, `${header(lang, t)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy"><p class="eyebrow"><span class="tiny-sun">${icon('sun')}</span>${t.eyebrow}</p><h1 id="hero-title">${t.hero[0]}<br><span>${t.hero[1]}</span></h1><p class="hero-description">${t.heroText}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a><div class="hero-bottom"><span>${t.heroNote}</span><a href="#benvenuti" class="scroll-cue" aria-label="${t.introLabel}">${icon('down')}</a></div></div>
-    <div class="hero-image">${photo('casa', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}<div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>${t.heroCaption}</span></div></div>
+    <div class="hero-image">${photo('apertura', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}<div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>${t.heroCaption}</span></div></div>
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>
   <section class="house section-width section-space" id="casa" aria-labelledby="house-title">
     <p class="eyebrow">${t.houseLabel}</p>
     <div class="section-heading"><div><h2 id="house-title">${lines(t.houseTitle)}</h2><ul class="facts">${t.facts.map(([symbol, text]) => `<li>${icon(symbol)}<span>${text}</span></li>`).join('')}</ul></div><p class="section-description">${t.houseText}</p></div>
     <div class="house-mosaic"><figure class="mosaic-main">${photoLink('cucina', t, { sizes: '(min-width: 700px) 60vw, 100vw' })}<figcaption><span>01</span>${t.captions.cucina}</figcaption></figure><figure>${photoLink('camera', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>02</span>${t.captions.camera}</figcaption></figure><figure>${photoLink('cortile', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>03</span>${t.captions.cortile}</figcaption></figure></div>
-    <details class="more-photos"><summary>${t.gallery}<span class="gallery-count">08</span>${icon('plus')}</summary><div class="gallery-grid" aria-label="${t.galleryLabel}">${galleryPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 25vw, 50vw' })}<figcaption>${t.captions[key]}</figcaption></figure>`).join('')}</div></details>
+    <div class="house-details">${houseDetails.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}<figcaption>${escape(t.captions[key])}</figcaption></figure>`).join('')}</div>
+    <details class="more-photos"><summary>${t.gallery}<span class="gallery-count">${String(galleryPhotos.length).padStart(2, '0')}</span>${icon('plus')}</summary><div class="gallery-grid" aria-label="${t.galleryLabel}">${galleryPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 25vw, 50vw' })}<figcaption>${t.captions[key]}</figcaption></figure>`).join('')}</div></details>
   </section>
-  <section class="life section-space" id="vita" aria-labelledby="life-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">${t.lifeLabel}</p><h2 id="life-title">${lines(t.lifeTitle)}</h2></div><p class="section-description">${t.lifeText}</p></div><div class="life-grid">${t.lifeCards.map((card, i) => `<article><figure>${photo(card.image, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}</figure><h3>${card.title}</h3><p>${card.text}</p></article>`).join('')}</div><div class="host"><div class="host-heading"><span class="host-sun">${icon('sun')}</span><div><p class="eyebrow">${t.hostLabel}</p><h3>${lines(t.hostTitle)}</h3></div></div><p>${t.hostText}</p></div></div></section>
+  <section class="life section-space" id="vita" aria-labelledby="life-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">${t.lifeLabel}</p><h2 id="life-title">${lines(t.lifeTitle)}</h2></div><p class="section-description">${t.lifeText}</p></div><div class="life-grid">${t.lifeCards.map((card, i) => `<article><figure>${photoLink(card.image, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}</figure><h3>${card.title}</h3><p>${card.text}</p></article>`).join('')}</div><div class="outdoor-story"><h3>${escape(t.outdoorTitle)}</h3><div class="outdoor-photos">${outdoorPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 50vw, 100vw' })}<figcaption>${escape(t.captions[key])}</figcaption></figure>`).join('')}</div></div><div class="host"><div class="host-heading"><span class="host-sun">${icon('sun')}</span><div><p class="eyebrow">${t.hostLabel}</p><h3>${lines(t.hostTitle)}</h3></div></div><p>${t.hostText}</p></div></div></section>
   <section class="family-memory section-width section-space" aria-labelledby="memory-title">
     <div class="memory-workbench">
       <figure class="memory-making">${photo('impasto', t, { sizes: '(min-width: 700px) 32vw, 60vw' })}<figcaption>${escape(t.captions.impasto)}</figcaption></figure>
