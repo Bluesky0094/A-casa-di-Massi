@@ -1,7 +1,7 @@
 """Generate responsive WebP derivatives without altering the source photographs.
 
 Requires Pillow. Run from the project root with `npm run images`.
-No colour grading, retouching, compositing or generative changes are applied.
+This derivative step applies no additional colour grading, retouching or generative changes.
 """
 from pathlib import Path
 from PIL import Image, ImageOps
@@ -15,7 +15,15 @@ OUTPUT.mkdir(parents=True, exist_ok=True)
 
 SELECTION = {
     "casa": "DSC07944.jpg",
+    # User-approved imagegen edit; the original JPEG and CR3 remain untouched.
+    "apertura": "../../../output/imagegen/hero-colour-ai-draft.png",
     "cucina": "DSC07885.jpg",
+    "cucina-ampia": "DSC07882-HDR.jpg",
+    "limoni": "DSC07890.jpg",
+    "erbe": "DSC07891.jpg",
+    "tavola": "DSC07930.jpg",
+    "giardino": "DSC07957.jpg",
+    "esterno": "DSC07968.jpg",
     "camera": "DSC07910.jpg",
     "cortile": "DSC07932.jpg",
     "dettagli": "DSC07937.jpg",

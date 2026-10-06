@@ -51,7 +51,7 @@ p{text-wrap:pretty}
 .header-book{background:var(--yellow);font-size:13px;min-height:44px;padding:12px 15px;gap:18px;white-space:nowrap}
 .header-book:hover{background:var(--ink);color:var(--white)}
 .mobile-menu{display:none}
-.hero{display:grid;grid-template-columns:42% 58%;max-width:1600px;min-height:630px;margin-inline:auto}
+.hero{display:grid;grid-template-columns:42% 58%;width:100%;min-height:630px}
 .hero-copy{background:var(--turquoise);color:var(--white);padding:69px 35px 24px var(--gutter);display:flex;flex-direction:column;align-items:flex-start;position:relative}
 .hero-copy>.eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.13em}
 .tiny-sun{display:inline-flex;color:var(--yellow)}
@@ -65,7 +65,7 @@ html[lang=en] .hero h1{font-size:clamp(44px,4.2vw,62px)}
 .scroll-cue{width:42px;height:42px;display:grid;place-content:center}
 .scroll-cue .icon{width:21px}
 .hero-image{position:relative;min-height:630px}
-.hero-image>img{height:100%;position:absolute;inset:0;object-position:58% 50%}
+.hero-image>img{height:100%;position:absolute;inset:0;object-position:75% 50%}
 .photo-note{position:absolute;bottom:28px;left:28px;color:#fff;background:var(--dark);padding:10px 15px;display:flex;flex-direction:column;font-size:12px;letter-spacing:.03em;line-height:1.7;z-index:1}
 .photo-note span:first-child{font-size:14px}
 .intro{display:grid;grid-template-columns:1.25fr 1fr;gap:10%;padding-block:82px;border-bottom:1px solid var(--line);align-items:center}
@@ -216,7 +216,7 @@ figcaption>span:first-child{font-size:12px}
   .hero-description{grid-column:2;grid-row:2;margin-top:30px;font-size:16px}
   .hero-copy>.button{grid-column:2;grid-row:3;justify-self:start;margin-top:20px;align-self:start;padding:12px 19px;min-height:47px}
   .hero-bottom{display:none}
-  .hero-image{min-height:460px}.hero-image>img{object-position:50% 53%}
+  .hero-image{min-height:460px}.hero-image>img{object-position:75% 50%}
   
   .photo-note{left:var(--gutter)}
   .intro{gap:7%;padding-block:65px}.intro h2{font-size:33px}.intro>p{font-size:16px}
@@ -252,7 +252,7 @@ figcaption>span:first-child{font-size:12px}
   .hero-description{font-size:16px;line-height:1.75;max-width:340px;margin:0}
   .hero-copy>.button{margin-top:23px;min-height:46px;font-size:13px;padding:13px 20px;gap:26px}
   .hero-image{min-height:370px}
-  .hero-image>img{object-position:57% 51%}
+  .hero-image>img{object-position:75% 50%}
   
   .photo-note{bottom:20px;font-size:12px}.photo-note span:first-child{font-size:13px}
   .intro{grid-template-columns:1fr;gap:23px;padding-block:47px 49px}.intro .eyebrow{font-size:12px}.intro h2{font-size:34px;margin-top:19px}.intro>p{font-size:16px;max-width:530px;line-height:1.85}
@@ -307,3 +307,12 @@ figcaption>span:first-child{font-size:12px}
 .memory-bread img{aspect-ratio:1.15;object-position:48% 50%}
 @media(min-width:700px) and (max-width:1000px){.family-memory{gap:6%;padding-block:80px}.memory-workbench{padding-bottom:65px}.memory-oven{top:20px}.memory-dough{border-width:6px}.family-memory .memory-copy h2{font-size:38px}.family-memory .memory-quote p{font-size:15px}.memory-keepsakes{margin-top:35px}.memory-narrative{padding-top:0}}
 @media(max-width:699px){.family-memory{display:flex;flex-direction:column;gap:38px;padding-block:62px 70px}.memory-narrative{display:contents}.family-memory .memory-copy{order:0}.family-memory .memory-copy h2{font-size:42px}.family-memory .memory-quote{margin-top:22px}.family-memory .memory-quote p{font-size:16px}.memory-workbench{order:1;width:100%;padding-bottom:60px}.memory-oven{top:25px}.memory-dough{right:-1%;border-width:6px}.memory-keepsakes{order:2;width:85%;margin-top:0;align-self:center}.memory-workbench figcaption{font-size:11px}}
+
+/* Extra views of the kitchen and the grounds. */
+.house-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:32px}
+.house-details img{aspect-ratio:3/2}
+.outdoor-story{margin-top:65px;padding-top:45px;border-top:1px solid var(--line)}
+.outdoor-story>h3{font-size:clamp(28px,3vw,38px);margin-bottom:28px}
+.outdoor-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 28px}
+.outdoor-photos img{aspect-ratio:3/2}
+@media(max-width:699px){.house-details{grid-template-columns:1fr;gap:25px;margin-top:25px}.outdoor-story{margin-top:40px;padding-top:32px}.outdoor-photos{grid-template-columns:1fr;gap:26px}.outdoor-story>h3{margin-bottom:22px}}

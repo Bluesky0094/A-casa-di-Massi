@@ -398,5 +398,180 @@
         "bytes": 214180
       }
     ]
+  },
+  "apertura": {
+    "source": "output/imagegen/hero-colour-ai-draft.png",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 41080
+      },
+      {
+        "width": 800,
+        "height": 533,
+        "bytes": 106014
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 218248
+      },
+      {
+        "width": 1800,
+        "height": 1200,
+        "bytes": 390520
+      }
+    ]
+  },
+  "cucina-ampia": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07882-HDR.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 25868
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 58780
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 112260
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 218974
+      }
+    ]
+  },
+  "limoni": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07890.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 16006
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 35362
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 64582
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 125814
+      }
+    ]
+  },
+  "erbe": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07891.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 26004
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 56862
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 103482
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 191804
+      }
+    ]
+  },
+  "tavola": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07930.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 30622
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 62762
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 106488
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 188802
+      }
+    ]
+  },
+  "giardino": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07957.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 56872
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 154304
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 333254
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 700606
+      }
+    ]
+  },
+  "esterno": {
+    "source": "sources/Casa di Massi/Foto casa/DSC07968.jpg",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 35108
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 94524
+      },
+      {
+        "width": 1200,
+        "height": 800,
+        "bytes": 203452
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 438400
+      }
+    ]
   }
 }
