@@ -6,6 +6,12 @@ import { root } from './build.mjs';
 import { siteUrl, basePath, sitePath, absoluteUrl } from '../src/site.mjs';
 
 const dist = resolve(root, 'dist');
+const imageSources = JSON.parse(await readFile(resolve(root, 'src/images.json'), 'utf8'));
+for (const [name, image] of Object.entries(imageSources)) {
+  assert.equal(resolve(root, image.source, '..'), resolve(root, 'sources/Casa di Massi/Used in website'), `Source collection: ${name}`);
+  await access(resolve(root, image.source));
+}
+
 let links = 0;
 let images = 0;
 const routes = ['/','/en/','/es/','/privacy/','/en/privacy/','/es/privacy/','/404.html'];

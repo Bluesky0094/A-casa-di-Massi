@@ -1,6 +1,6 @@
 {
   "casa": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07944.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07944.jpg",
     "variants": [
       {
         "width": 480,
@@ -25,7 +25,7 @@
     ]
   },
   "cucina": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07885.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07885.jpg",
     "variants": [
       {
         "width": 480,
@@ -50,7 +50,7 @@
     ]
   },
   "camera": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07910.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07910.jpg",
     "variants": [
       {
         "width": 480,
@@ -75,7 +75,7 @@
     ]
   },
   "cortile": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07932.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07932.jpg",
     "variants": [
       {
         "width": 480,
@@ -100,7 +100,7 @@
     ]
   },
   "dettagli": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07937.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07937.jpg",
     "variants": [
       {
         "width": 480,
@@ -125,7 +125,7 @@
     ]
   },
   "pane": {
-    "source": "sources/Casa di Massi/Foto evento/_DSC7907.jpg",
+    "source": "sources/Casa di Massi/Used in website/_DSC7907.jpg",
     "variants": [
       {
         "width": 480,
@@ -150,7 +150,7 @@
     ]
   },
   "amaca": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07950.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07950.jpg",
     "variants": [
       {
         "width": 480,
@@ -175,7 +175,7 @@
     ]
   },
   "orto": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07997.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07997.jpg",
     "variants": [
       {
         "width": 480,
@@ -200,7 +200,7 @@
     ]
   },
   "bici": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07964.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07964.jpg",
     "variants": [
       {
         "width": 480,
@@ -225,7 +225,7 @@
     ]
   },
   "campagna": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07955.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07955.jpg",
     "variants": [
       {
         "width": 480,
@@ -250,7 +250,7 @@
     ]
   },
   "pietra": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07973.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07973.jpg",
     "variants": [
       {
         "width": 480,
@@ -275,7 +275,7 @@
     ]
   },
   "bagno": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07913-HDR.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07913-HDR.jpg",
     "variants": [
       {
         "width": 480,
@@ -300,7 +300,7 @@
     ]
   },
   "soppalco": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07904.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07904.jpg",
     "variants": [
       {
         "width": 480,
@@ -325,7 +325,7 @@
     ]
   },
   "forno": {
-    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.38.jpg",
+    "source": "sources/Casa di Massi/Used in website/WhatsApp Image 2025-04-18 at 17.09.38.jpg",
     "variants": [
       {
         "width": 480,
@@ -350,7 +350,7 @@
     ]
   },
   "impasto": {
-    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.40.jpg",
+    "source": "sources/Casa di Massi/Used in website/WhatsApp Image 2025-04-18 at 17.09.40.jpg",
     "variants": [
       {
         "width": 480,
@@ -375,7 +375,7 @@
     ]
   },
   "lievitazione": {
-    "source": "sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.41.jpg",
+    "source": "sources/Casa di Massi/Used in website/WhatsApp Image 2025-04-18 at 17.09.41.jpg",
     "variants": [
       {
         "width": 480,
@@ -400,7 +400,7 @@
     ]
   },
   "apertura": {
-    "source": "output/imagegen/hero-colour-ai-draft.png",
+    "source": "sources/Casa di Massi/Used in website/hero-colour-ai-draft.png",
     "variants": [
       {
         "width": 480,
@@ -425,7 +425,7 @@
     ]
   },
   "cucina-ampia": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07882-HDR.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07882-HDR.jpg",
     "variants": [
       {
         "width": 480,
@@ -450,7 +450,7 @@
     ]
   },
   "limoni": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07890.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07890.jpg",
     "variants": [
       {
         "width": 480,
@@ -475,7 +475,7 @@
     ]
   },
   "erbe": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07891.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07891.jpg",
     "variants": [
       {
         "width": 480,
@@ -500,7 +500,7 @@
     ]
   },
   "tavola": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07930.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07930.jpg",
     "variants": [
       {
         "width": 480,
@@ -525,7 +525,7 @@
     ]
   },
   "giardino": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07957.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07957.jpg",
     "variants": [
       {
         "width": 480,
@@ -550,7 +550,7 @@
     ]
   },
   "esterno": {
-    "source": "sources/Casa di Massi/Foto casa/DSC07968.jpg",
+    "source": "sources/Casa di Massi/Used in website/DSC07968.jpg",
     "variants": [
       {
         "width": 480,
@@ -571,6 +571,31 @@
         "width": 1800,
         "height": 1201,
         "bytes": 438400
+      }
+    ]
+  },
+  "casa-laterale": {
+    "source": "sources/Casa di Massi/Used in website/IMG_8782-adobe-colour-match.png",
+    "variants": [
+      {
+        "width": 480,
+        "height": 320,
+        "bytes": 27764
+      },
+      {
+        "width": 800,
+        "height": 534,
+        "bytes": 73130
+      },
+      {
+        "width": 1200,
+        "height": 801,
+        "bytes": 152750
+      },
+      {
+        "width": 1800,
+        "height": 1201,
+        "bytes": 301158
       }
     ]
   }
