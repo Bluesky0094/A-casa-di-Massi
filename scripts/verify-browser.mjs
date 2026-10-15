@@ -37,7 +37,11 @@ for (const [device, width, height] of [['mobile', 390, 844], ['tablet', 768, 102
       horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
       overflowElements: Array.from(document.body.querySelectorAll('*')).filter(el => {
         if (el.closest('dialog, details:not([open])') || el.classList.contains('sr-only') || el.classList.contains('skip-link')) return false;
-        const rect = el.getBoundingClientRect(); return rect.width > 0 && (rect.right > innerWidth + 1 || rect.left < -1);
+        let rect = el.getBoundingClientRect();
+        // Slides intentionally extend inside a clipped viewport, not the page.
+        const clip = el.closest('.hero-viewport');
+        if (clip) { const bounds = clip.getBoundingClientRect(); rect = {width: Math.max(0, Math.min(rect.right,bounds.right)-Math.max(rect.left,bounds.left)), left: Math.max(rect.left,bounds.left), right: Math.min(rect.right,bounds.right)}; }
+        return rect.width > 0 && (rect.right > innerWidth + 1 || rect.left < -1);
       }).map(el => el.tagName + '.' + el.className),
       brokenImages: Array.from(document.images).filter(img => img.getClientRects().length && !img.closest('details:not([open]), dialog:not([open])') && (!img.complete || !img.naturalWidth)).map(img => img.src),
       h1Count: document.querySelectorAll('h1').length,

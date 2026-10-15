@@ -36,12 +36,27 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
   const image = dialog.querySelector('img');
   let index = 0;
   let trigger;
+  let photoRequest = 0;
 
   function showPhoto(next) {
     index = (next + keys.length) % keys.length;
     const key = keys[index];
+    // Changing src can leave the previous decoded bitmap on screen until loading finishes.
+    image.style.visibility = 'hidden';
     image.alt = gallery.photos[key].alt;
+
+    const request = ++photoRequest;
     image.src = gallery.photos[key].src;
+    image.decode().then(() => {
+      if (request !== photoRequest || !dialog.open) return;
+      image.style.visibility = 'visible';
+
+    }).catch(() => {
+      if (request !== photoRequest || !dialog.open) return;
+      // Expose the current photo's alternative text, never an old bitmap, on failure.
+      image.removeAttribute('src');
+      image.style.visibility = 'visible';
+    });
     dialog.querySelector('[data-caption]').textContent = gallery.photos[key].caption;
     dialog.querySelector('[data-counter]').textContent = `${index + 1} ${gallery.of} ${keys.length}`;
   }
@@ -56,13 +71,20 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
       trigger = link;
       showPhoto(next);
       dialog.showModal();
+
     });
   });
   dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
   dialog.querySelector('.lightbox-previous').addEventListener('click', () => showPhoto(index - 1));
   dialog.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(index + 1));
   dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-  dialog.addEventListener('close', () => trigger?.focus({ preventScroll: true }));
+  dialog.addEventListener('close', () => {
+    photoRequest++;
+
+    image.style.visibility = 'hidden';
+    image.removeAttribute('src');
+    trigger?.focus({ preventScroll: true });
+  });
   dialog.addEventListener('keydown', (event) => {
     if (event.key === 'Tab') {
       const buttons = [...dialog.querySelectorAll('button')];
@@ -81,4 +103,66 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
       showPhoto(index + (event.key === 'ArrowRight' ? 1 : -1));
     }
   });
+}
+
+// The opening photos are the only automatic movement on the page.
+const heroSlider = document.querySelector('[data-hero-slider]');
+if (heroSlider) {
+  const track = heroSlider.querySelector('.hero-track');
+  const photos = [...track.querySelectorAll('img')];
+  const controls = heroSlider.querySelector('.hero-controls');
+  const caption = heroSlider.querySelector('[data-hero-caption]');
+  const counter = heroSlider.querySelector('[data-hero-counter]');
+  const pause = heroSlider.querySelector('[data-hero-pause]');
+  const pauseIcon = pause.innerHTML;
+  const playIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="currentColor"/></svg>';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+  let requested = 0;
+  let request = 0;
+  let paused = reduced.matches;
+  let hovering = false;
+  let inView = true;
+  let timer;
+  function updatePause() {
+    pause.setAttribute('aria-label', paused ? pause.dataset.resume : pause.dataset.pause);
+    pause.innerHTML = paused ? playIcon : pauseIcon;
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (!paused && !hovering && inView && !document.hidden) timer = setTimeout(() => show(current + 1), 6000);
+  }
+  async function show(next, manual = false) {
+    clearTimeout(timer);
+    if (manual) { paused = true; updatePause(); }
+    requested = (next + photos.length) % photos.length;
+    const target = requested;
+    const token = ++request;
+    try { await photos[target].decode(); } catch { if (token === request) schedule(); return; }
+    if (token !== request) return;
+    current = target;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    photos.forEach((photo, i) => photo.setAttribute('aria-hidden', String(i !== current)));
+    caption.textContent = current ? caption.dataset.second : caption.dataset.first;
+    counter.textContent = `${current + 1} / ${photos.length}`;
+    schedule();
+  }
+  heroSlider.querySelector('[data-hero-previous]').addEventListener('click', () => show(requested - 1, true));
+  heroSlider.querySelector('[data-hero-next]').addEventListener('click', () => show(requested + 1, true));
+  pause.addEventListener('click', () => { paused = !paused; updatePause(); schedule(); });
+  heroSlider.addEventListener('focusin', event => {
+    if (event.target === pause) return;
+    paused = true; updatePause(); schedule();
+  });
+  heroSlider.addEventListener('mouseenter', () => { hovering = true; schedule(); });
+  heroSlider.addEventListener('mouseleave', () => { hovering = false; schedule(); });
+  document.addEventListener('visibilitychange', schedule);
+  reduced.addEventListener('change', () => { if (reduced.matches) { paused = true; updatePause(); schedule(); } });
+  if (typeof IntersectionObserver === 'function') {
+    new IntersectionObserver(entries => { inView = entries[0].isIntersecting; schedule(); }).observe(heroSlider);
+  }
+  photos[1].setAttribute('aria-hidden', 'true');
+  controls.hidden = false;
+  updatePause();
+  schedule();
 }

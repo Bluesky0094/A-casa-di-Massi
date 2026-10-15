@@ -49,3 +49,11 @@ Non creare per ora pagine o sezioni autonome su eventi, “progetto”, murales 
 ## Metodo di lavoro
 
 Leggere queste istruzioni e i materiali in `sources/`, scegliere le immagini più adatte, proporre una direzione visiva concreta e costruire una prima versione locale completa. Fare scelte ragionevoli in autonomia; chiedere chiarimenti solo se un dato mancante impedisce davvero di proseguire. Conservare i file sorgente originali e documentare le eventuali immagini derivate usate nel sito.
+
+
+## Foto utilizzate nel sito
+
+- La cartella `sources/Casa di Massi/Used in website/` raccoglie i file sorgente delle immagini effettivamente utilizzate dal sito, comprese le immagini modificate approvate. Ogni agente deve mantenerla aggiornata quando aggiunge, sostituisce o rimuove fotografie.
+- Quando una foto entra nel sito, spostare il suo sorgente in questa cartella senza alterarne il contenuto; quando non è più usata in nessuna sezione o galleria, riportarla nella raccolta di provenienza documentata, senza cancellarla. Prima di sovrascrivere un file omonimo, controllarne il contenuto.
+- Aggiornare insieme `scripts/prepare-images.py`, `src/images.json`, riferimenti e testi alternativi. Registrare la provenienza quando si aggiungono o spostano immagini; la ricollocazione del 15 ottobre 2026 è documentata in `docs/PROGETTO.md`.
+- Le versioni WebP responsive restano in `public/images/`; rigenerarle quando cambia il sorgente e rimuovere solo le varianti non più utilizzate. `dist/` viene ricreato dalla build. Verificare i percorsi con `npm run check` e controllare le foto nel browser dopo ogni modifica alla selezione.

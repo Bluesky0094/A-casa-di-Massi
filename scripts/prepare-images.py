@@ -9,14 +9,15 @@ import json
 import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "sources/Casa di Massi/Foto casa"
+SOURCE = ROOT / "sources/Casa di Massi/Used in website"
 OUTPUT = ROOT / "public/images"
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
 SELECTION = {
     "casa": "DSC07944.jpg",
     # User-approved imagegen edit; the original JPEG and CR3 remain untouched.
-    "apertura": "../../../output/imagegen/hero-colour-ai-draft.png",
+    "apertura": "hero-colour-ai-draft.png",
+    "casa-laterale": "IMG_8782-adobe-colour-match.png",
     "cucina": "DSC07885.jpg",
     "cucina-ampia": "DSC07882-HDR.jpg",
     "limoni": "DSC07890.jpg",
@@ -30,7 +31,7 @@ SELECTION = {
     "forno": "WhatsApp Image 2025-04-18 at 17.09.38.jpg",
     "impasto": "WhatsApp Image 2025-04-18 at 17.09.40.jpg",
     "lievitazione": "WhatsApp Image 2025-04-18 at 17.09.41.jpg",
-    "pane": "../Foto evento/_DSC7907.jpg",
+    "pane": "_DSC7907.jpg",
     "amaca": "DSC07950.jpg",
     "orto": "DSC07997.jpg",
     "bici": "DSC07964.jpg",

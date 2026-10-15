@@ -52,3 +52,49 @@ L’informativa nelle tre lingue descrive GitHub Pages, la registrazione degli I
 ## Citazione di Massi sul pane — 25 settembre 2026
 
 Testo originale fornito direttamente dall’utente: “è casa di famiglia adibita anche alla cottura del pane in forno a legna e quindi il ricordo dell'odore del pane”. Inserito come citazione firmata da Massi nella sezione familiare, con sole modifiche a maiuscole e punteggiatura; tradotto in inglese e spagnolo. Questa citazione è un’eccezione editoriale richiesta dall’utente: le altre risposte restano una guida interna. Il pane è un ricordo, non un servizio offerto. La foto del pane sostituisce i limoni solo nella sezione familiare; gli originali non sono modificati.
+
+
+## Raccolta dei sorgenti utilizzati — 15 ottobre 2026
+
+Tutti i 23 sorgenti utilizzati sono stati spostati in `sources/Casa di Massi/Used in website/`, conservandone i nomi e verificando che il contenuto SHA-256 sia identico prima e dopo lo spostamento. Le versioni WebP rimangono in `public/images/`. Il generatore e il manifest puntano alla nuova raccolta; i percorsi riportati nelle sezioni precedenti descrivono la provenienza storica.
+
+| Immagine web | Provenienza prima dello spostamento | Nome nella raccolta utilizzata |
+| --- | --- | --- |
+| casa | `sources/Casa di Massi/Foto casa/DSC07944.jpg` | `DSC07944.jpg` |
+| cucina | `sources/Casa di Massi/Foto casa/Selezionate/DSC07885.jpg` | `DSC07885.jpg` |
+| camera | `sources/Casa di Massi/Foto casa/Selezionate/DSC07910.jpg` | `DSC07910.jpg` |
+| cortile | `sources/Casa di Massi/Foto casa/DSC07932.jpg` | `DSC07932.jpg` |
+| dettagli | `sources/Casa di Massi/Foto casa/DSC07937.jpg` | `DSC07937.jpg` |
+| pane | `sources/Casa di Massi/Foto evento/_DSC7907.jpg` | `_DSC7907.jpg` |
+| amaca | `sources/Casa di Massi/Foto casa/DSC07950.jpg` | `DSC07950.jpg` |
+| orto | `sources/Casa di Massi/Foto casa/DSC07997.jpg` | `DSC07997.jpg` |
+| bici | `sources/Casa di Massi/Foto casa/DSC07964.jpg` | `DSC07964.jpg` |
+| campagna | `sources/Casa di Massi/Foto casa/DSC07955.jpg` | `DSC07955.jpg` |
+| pietra | `sources/Casa di Massi/Foto casa/Selezionate/DSC07973.jpg` | `DSC07973.jpg` |
+| bagno | `sources/Casa di Massi/Foto casa/DSC07913-HDR.jpg` | `DSC07913-HDR.jpg` |
+| soppalco | `sources/Casa di Massi/Foto casa/Selezionate/DSC07904.jpg` | `DSC07904.jpg` |
+| forno | `sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.38.jpg` | `WhatsApp Image 2025-04-18 at 17.09.38.jpg` |
+| impasto | `sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.40.jpg` | `WhatsApp Image 2025-04-18 at 17.09.40.jpg` |
+| lievitazione | `sources/Casa di Massi/Foto casa/WhatsApp Image 2025-04-18 at 17.09.41.jpg` | `WhatsApp Image 2025-04-18 at 17.09.41.jpg` |
+| apertura | `output/imagegen/hero-colour-ai-draft.png` | `hero-colour-ai-draft.png` |
+| cucina-ampia | `sources/Casa di Massi/Foto casa/DSC07882-HDR.jpg` | `DSC07882-HDR.jpg` |
+| limoni | `sources/Casa di Massi/Foto casa/DSC07890.jpg` | `DSC07890.jpg` |
+| erbe | `sources/Casa di Massi/Foto casa/DSC07891.jpg` | `DSC07891.jpg` |
+| tavola | `sources/Casa di Massi/Foto casa/DSC07930.jpg` | `DSC07930.jpg` |
+| giardino | `sources/Casa di Massi/Foto casa/DSC07957.jpg` | `DSC07957.jpg` |
+| esterno | `sources/Casa di Massi/Foto casa/DSC07968.jpg` | `DSC07968.jpg` |
+
+## Seconda vista d’apertura — 15 ottobre 2026
+
+Esaminate le anteprime incorporate dei 18 file CR3 in `Foto Erika`. Scelto `IMG_8782.CR3` per la facciata laterale, il portico e il murale visibile fra le piante. Il RAW è stato spostato senza alterazioni da `Foto Erika/` a `Used in website/`; la raccolta dei sorgenti usati contiene ora 24 immagini.
+
+La chiave web è `casa-laterale`. Sviluppo RAW riproducibile nel generatore tramite LibRaw `dcraw_emu`: bilanciamento del bianco della fotocamera, sRGB, fusione alte luci `-H 2`, luminosità `-b 1.35`, curva `-g 2.4 12.92`, interpolazione AHD. Nessuna modifica generativa, rimozione di oggetti o cambiamento dei colori della casa. Il confronto visivo con l’apertura esistente privilegia intonaco caldo, verde naturale e dettagli nelle ombre, rispettando la diversa luce solare della ripresa. WebP a 480/800/1200/1800 px; il RAW non viene distribuito nel sito.
+
+Su richiesta esplicita dell’utente, l’apertura alterna automaticamente le due foto ogni sei secondi, con scorrimento orizzontale di 450 ms, frecce e pausa/ripresa. Nessuna altra animazione di pagina viene reintrodotta. I controlli e le descrizioni sono tradotti IT/EN/ES; il movimento ridotto disattiva riproduzione automatica e transizione. L’automatismo si sospende con hover, durante interazione manuale, quando la scheda è nascosta o l’apertura esce dal viewport. Senza JavaScript rimane visibile la prima foto.
+
+
+## Vista laterale: versione Adobe approvata — 15 ottobre 2026
+
+L’utente ha approvato la versione più ricca di colori (`artifacts/adobe/side-house-rich-colours.png`) e chiesto di inserirla nel sito. Il sorgente di `casa-laterale` è ora `Used in website/IMG_8782-adobe-colour-match.png`; il RAW originale è stato riportato in `Foto Erika/IMG_8782.CR3` senza modificarlo. La versione Adobe è un PNG di 1800 px ottenuto dalla precedente derivata web: il processore Adobe non accetta CR3 e il trasferimento del TIFF a piena risoluzione è scaduto. Nessun ingrandimento artificiale. La versione chiara precedente resta solo come anteprima negli artefatti.
+
+Modifica Adobe non generativa, richiesta `03f17c6c-c210-42b1-95f4-214f35f6bbd4`: contrast 32, brightness 3, highlights -28, shadows -12, darks -10, vibrance 60, saturation 20, tempA 3, tempB 20, tempLuminance 50. Il generatore usa il PNG approvato per tutte le quattro varianti responsive, senza aggiungere altre correzioni cromatiche. Nessuna modifica al comportamento dello slideshow.

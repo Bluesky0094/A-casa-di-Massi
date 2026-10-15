@@ -74,3 +74,25 @@ Sostituita la precedente direzione multicolore con turchese, calce e accenti gia
 ## Pane e ricordo di Massi — 25 settembre 2026
 
 Sostituita la foto dei limoni nella sezione familiare con `_DSC7907.jpg` (pane nel cesto), con quattro varianti WebP e testi alternativi IT/EN/ES. Inserita la risposta originale fornita dall’utente come citazione firmata da Massi, con punteggiatura rivista e traduzioni. Build e controlli statici superati; nove combinazioni lingua/viewport senza overflow, immagini mancanti o violazioni axe. Verificata visivamente la composizione desktop in `artifacts/pane-citazione-desktop.png`.
+
+## Ancoraggi — 13 ottobre 2026
+
+Rimosso l’offset di 110 px previsto per un header fisso: l’intestazione è nel normale flusso della pagina. Gli ancoraggi delle sezioni compensano ora il padding superiore e lasciano 24 px prima dei contenuti, con valori coerenti ai tre breakpoint. Nessuna intercettazione JavaScript: URL con frammento, navigazione nativa e preferenza per movimento ridotto restano funzionanti.
+
+`AGENT_BROWSER_BIN=/home/stefano/.local/npm/bin/agent-browser node scripts/verify-anchors.mjs` verifica CTA, menu mobile/desktop, benvenuti, ritorno in alto, skip link e conservazione del frammento nei link lingua a 390, 768 e 1440 px in IT/EN/ES, oltre ai link privacy → casa nelle tre lingue. Tutti superati. Verificato anche l’arrivo del CTA (arrivo prima: circa 210 px; dopo: 24 px) e la schermata `artifacts/anchors-casa-desktop.png`. Controlli statici e whitespace superati. Modifiche locali, nessuna pubblicazione.
+
+## Viewer: foto precedente durante il caricamento — 15 ottobre 2026
+
+L’immagine viene nascosta prima di cambiare `src` e mostrata soltanto dopo la decodifica della richiesta corrente. Alla chiusura si cancella la sorgente; le richieste completate dopo chiusura o navigazione non possono ripristinare immagini precedenti. In caso di errore si espone il testo alternativo della foto corrente senza conservare il vecchio bitmap.
+
+Verifica browser con decodifica ritardata artificialmente di 700 ms: apertura dopo un’altra foto, navigazione rapida e chiusura/riapertura durante il caricamento superate. Sorgente cancellata alla chiusura e focus ripristinato correttamente. Nessun errore browser rilevato; controlli statici e whitespace superati. Modifica locale.
+
+## Vista laterale e apertura a due foto — 15 ottobre 2026
+
+Verificati sviluppo RAW, manifest e percorsi della nuova immagine `casa-laterale`. Confronto visivo con la foto attuale e controllo dei ritagli desktop/mobile (`artifacts/hero-side-desktop.png`, `artifacts/hero-side-mobile.png`). Tutte le nove combinazioni IT/EN/ES × mobile/tablet/desktop superano i controlli responsive e axe: nessun overflow, immagine mancante, violazione o controllo incompleto. Il test di overflow considera correttamente il clipping delle diapositive nel loro viewport.
+
+Nel browser verificati avanzamento automatico dopo sei secondi, frecce, pausa stabile oltre un intero intervallo e controlli inglesi/spagnoli. Con movimento ridotto: autoplay inizialmente disattivato, transizione di zero secondi e frecce manuali funzionanti. Nessun errore browser rilevato. Build e controlli statici superati. Anteprima locale, nessuna pubblicazione.
+
+## Inserimento della versione Adobe approvata — 15 ottobre 2026
+
+Sostituito il sorgente di `casa-laterale` con il PNG dai colori più ricchi approvato dall’utente. Rigenerate esclusivamente le quattro varianti WebP interessate, aggiornati manifest e provenienza; RAW riportato nella raccolta Foto Erika senza alterazioni. Build, controlli statici e whitespace superati. Nel browser la seconda diapositiva carica la nuova immagine senza overflow; verificata visivamente in `artifacts/adobe/approved-photo-on-site.png`. Anteprima locale avviata sulla porta 4321; nessuna pubblicazione.

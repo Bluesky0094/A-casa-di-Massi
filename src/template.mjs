@@ -12,6 +12,7 @@ const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp
 const lines = (value) => escape(value).replaceAll('\n', '<br>');
 
 const icons = {
+  pause: '<path d="M8 5v14M16 5v14"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   diagonal: '<path d="M6 18 18 6M6 6h12v12"/>',
   down: '<path d="M12 4v16M6 14l6 6 6-6"/>',
@@ -70,7 +71,11 @@ export function renderHome(lang, versions) {
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy"><p class="eyebrow"><span class="tiny-sun">${icon('sun')}</span>${t.eyebrow}</p><h1 id="hero-title">${t.hero[0]}<br><span>${t.hero[1]}</span></h1><p class="hero-description">${t.heroText}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a><div class="hero-bottom"><span>${t.heroNote}</span><a href="#benvenuti" class="scroll-cue" aria-label="${t.introLabel}">${icon('down')}</a></div></div>
-    <div class="hero-image">${photo('apertura', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}<div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>${t.heroCaption}</span></div></div>
+    <div class="hero-image" role="region" aria-label="${escape(t.heroSlider.label)}" data-hero-slider>
+      <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}${photo('casa-laterale', t, { sizes: '(min-width: 900px) 60vw, 100vw', className: 'hero-side' })}</div></div>
+      <div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span data-hero-caption data-first="${escape(t.heroCaption)}" data-second="${escape(t.heroSlider.sideCaption)}">${t.heroCaption}</span></div>
+      <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="off">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button><button type="button" data-hero-pause data-pause="${escape(t.heroSlider.pause)}" data-resume="${escape(t.heroSlider.resume)}" aria-label="${escape(t.heroSlider.pause)}">${icon('pause')}</button></div>
+    </div>
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>
   <section class="house section-width section-space" id="casa" aria-labelledby="house-title">
