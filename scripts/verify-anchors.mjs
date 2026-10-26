@@ -47,11 +47,21 @@ try {
         assert(Math.abs(check.top - (check.id === 'inizio' ? 0 : 24)) < 2, JSON.stringify({width,path,...check}));
         assert(check.menuClosed);
       }
-      assert(checks.languages.every(hash => hash === '#casa'));
-      console.log(`${width}px ${path}: CTA, menu, top, skip link e hash lingua OK`);
+      assert(checks.languages.every(hash => hash === ''), 'Language links must not carry stale section fragments');
+      // Reproduce the reported jump: visit a section, scroll back to the header,
+      // then change language while the old section still remains in the URL.
+      const nextLang = { '/': 'en', '/en/': 'es', '/es/': 'it' }[path];
+      browser('eval', 'window.scrollTo({top:0,behavior:"instant"})');
+      browser('click', `[data-language][lang="${nextLang}"]`);
+      const switched = browser('eval', `(async()=>{await document.fonts.ready;await new Promise(r=>setTimeout(r,700));return {lang:document.documentElement.lang,hash:location.hash,scroll:scrollY,behavior:getComputedStyle(document.documentElement).scrollBehavior}})()`).result;
+      assert.equal(switched.lang, nextLang);
+      assert.equal(switched.hash, '');
+      assert.equal(switched.scroll, 0, 'Changing language at the header stays at the top');
+      assert.equal(switched.behavior, 'smooth', 'Section navigation keeps smooth scrolling');
+      console.log(`${width}px ${path}: CTA, menu, top, skip link e cambio lingua senza salto OK`);
     }
   }
-  // Incoming fragments from other pages and language changes use the same native alignment.
+  // Explicit section links from other pages still use native anchor alignment.
   for (const path of ['/', '/en/', '/es/']) {
     browser('open', origin + path + 'privacy/');
     browser('eval', 'document.querySelector(\'.desktop-nav a[href$="#casa"]\').click()');

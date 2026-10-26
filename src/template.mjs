@@ -5,9 +5,9 @@ import { siteUrl, sitePath, absoluteUrl } from './site.mjs';
 export const bookingUrl = 'https://www.airbnb.it/rooms/1175206454292232540';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Via%20Calanchi%2078%2C%20Frigintini%2C%20Modica%2C%20Italia';
 const ids = ['casa', 'vita', 'territorio', 'dove'];
-const houseDetails = ['cucina-ampia', 'limoni', 'erbe'];
-const outdoorPhotos = ['tavola', 'amaca', 'giardino', 'esterno'];
-const galleryPhotos = ['cucina', 'camera', 'cortile', 'soppalco', 'bagno', 'casa', 'amaca', 'orto', ...houseDetails];
+const housePhotos = ['cucina', 'camera', 'cortile'];
+const outdoorPhotos = ['amaca', 'esterno'];
+const galleryPhotos = ['soppalco', 'bagno', 'casa', 'cucina-ampia', 'limoni', 'erbe', 'tavola', 'giardino'];
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const lines = (value) => escape(value).replaceAll('\n', '<br>');
 
@@ -20,6 +20,7 @@ const icons = {
   people: '<circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v2"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  expand: '<path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/>',
   close: '<path d="m6 6 12 12M6 18 18 6"/>',
   pin: '<path d="M19 10c0 5-7 12-7 12S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/>',
 };
@@ -28,8 +29,8 @@ const icon = (name, className = '') => `<svg class="icon ${className}" viewBox="
 function photo(key, t, { hero = false, sizes = '(min-width: 900px) 50vw, 100vw', className = '' } = {}) {
   return `<img class="${className}" src="${sitePath(`/images/${key}-800.webp`)}" srcset="${[480, 800, 1200, 1800].map(w => `${sitePath(`/images/${key}-${w}.webp`)} ${w}w`).join(', ')}" sizes="${sizes}" width="${images[key].variants.at(-1).width}" height="${images[key].variants.at(-1).height}" alt="${escape(t.alt[key])}" ${hero ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
 }
-function photoLink(key, t, options) {
-  return `<a class="photo-link" href="${sitePath(`/images/${key}-1800.webp`)}" data-photo="${key}" aria-label="${escape(`${t.photoOpen} ${t.captions[key]}`)}">${photo(key, t, options)}</a>`;
+function photoLink(key, t, { showLabel = false, ...options } = {}) {
+  return `<a class="photo-link" href="${sitePath(`/images/${key}-1800.webp`)}" data-photo="${key}" aria-label="${escape(`${t.photoOpen} ${t.captions[key]}`)}">${photo(key, t, options)}<span class="photo-cue" aria-hidden="true">${showLabel ? `<span>${escape(t.viewPhotos)}</span>` : ''}${icon('expand')}</span></a>`;
 }
 function externalLink(url, label, t, className = '') {
   return `<a class="${className}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(label)}${icon('diagonal')}<span class="sr-only"> (${t.external})</span></a>`;
@@ -66,7 +67,7 @@ ${siteUrl && !notFound ? `<link rel="canonical" href="${absoluteUrl(languages[la
 
 export function renderHome(lang, versions) {
   const t = content[lang];
-  const galleryData = Object.fromEntries([...new Set([...galleryPhotos, ...outdoorPhotos, ...t.lifeCards.map(card => card.image)])].map(key => [key, { alt: t.alt[key], caption: t.captions[key], src: sitePath(`/images/${key}-1800.webp`) }]));
+  const galleryData = Object.fromEntries([...new Set([...housePhotos, ...galleryPhotos, ...outdoorPhotos, ...t.lifeCards.map(card => card.image)])].map(key => [key, { alt: t.alt[key], caption: t.captions[key], src: sitePath(`/images/${key}-1800.webp`) }]));
   return shell(lang, `${header(lang, t)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
@@ -81,9 +82,9 @@ export function renderHome(lang, versions) {
   <section class="house section-width section-space" id="casa" aria-labelledby="house-title">
     <p class="eyebrow">${t.houseLabel}</p>
     <div class="section-heading"><div><h2 id="house-title">${lines(t.houseTitle)}</h2><ul class="facts">${t.facts.map(([symbol, text]) => `<li>${icon(symbol)}<span>${text}</span></li>`).join('')}</ul></div><p class="section-description">${t.houseText}</p></div>
-    <div class="house-mosaic"><figure class="mosaic-main">${photoLink('cucina', t, { sizes: '(min-width: 700px) 60vw, 100vw' })}<figcaption><span>01</span>${t.captions.cucina}</figcaption></figure><figure>${photoLink('camera', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>02</span>${t.captions.camera}</figcaption></figure><figure>${photoLink('cortile', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>03</span>${t.captions.cortile}</figcaption></figure></div>
-    <div class="house-details">${houseDetails.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}<figcaption>${escape(t.captions[key])}</figcaption></figure>`).join('')}</div>
+    <div class="house-mosaic"><figure class="mosaic-main">${photoLink('cucina', t, { showLabel: true, sizes: '(min-width: 700px) 60vw, 100vw' })}<figcaption><span>01</span>${t.captions.cucina}</figcaption></figure><figure>${photoLink('camera', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>02</span>${t.captions.camera}</figcaption></figure><figure>${photoLink('cortile', t, { sizes: '(min-width: 700px) 32vw, 50vw' })}<figcaption><span>03</span>${t.captions.cortile}</figcaption></figure></div>
     <details class="more-photos"><summary>${t.gallery}<span class="gallery-count">${String(galleryPhotos.length).padStart(2, '0')}</span>${icon('plus')}</summary><div class="gallery-grid" aria-label="${t.galleryLabel}">${galleryPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 25vw, 50vw' })}<figcaption>${t.captions[key]}</figcaption></figure>`).join('')}</div></details>
+    <div class="house-actions">${externalLink(bookingUrl, t.airbnb, t, 'button button-dark')}</div>
   </section>
   <section class="life section-space" id="vita" aria-labelledby="life-title"><div class="section-width"><div class="section-heading"><div><p class="eyebrow">${t.lifeLabel}</p><h2 id="life-title">${lines(t.lifeTitle)}</h2></div><p class="section-description">${t.lifeText}</p></div><div class="life-grid">${t.lifeCards.map((card, i) => `<article><figure>${photoLink(card.image, t, { sizes: '(min-width: 700px) 33vw, 100vw' })}</figure><h3>${card.title}</h3><p>${card.text}</p></article>`).join('')}</div><div class="outdoor-story"><h3>${escape(t.outdoorTitle)}</h3><div class="outdoor-photos">${outdoorPhotos.map(key => `<figure>${photoLink(key, t, { sizes: '(min-width: 700px) 50vw, 100vw' })}<figcaption>${escape(t.captions[key])}</figcaption></figure>`).join('')}</div></div><div class="host"><div class="host-heading"><span class="host-sun">${icon('sun')}</span><div><p class="eyebrow">${t.hostLabel}</p><h3>${lines(t.hostTitle)}</h3></div></div><p>${t.hostText}</p></div></div></section>
   <section class="family-memory section-width section-space" aria-labelledby="memory-title">
@@ -100,7 +101,7 @@ export function renderHome(lang, versions) {
   <section class="location section-space" id="dove" aria-labelledby="location-title"><div class="section-width"><p class="eyebrow">${t.locationLabel}</p><div class="location-layout"><div><h2 id="location-title">${lines(t.locationTitle)}</h2><div class="location-address"><span class="eyebrow">${t.addressLabel}</span><address>${t.address.map(escape).join('<br>')}</address>${externalLink(mapUrl, t.map, t, 'text-link')}</div></div><div class="stay"><span class="eyebrow">${t.stayLabel}</span><h3>A casa di Massi</h3><p>${t.stayText}</p>${externalLink(bookingUrl, t.airbnb, t, 'button button-dark')}<span class="stay-detail">${t.facts[1][1]} <span aria-hidden="true">·</span> ${t.facts[0][1]}</span></div></div></div></section>
   <div class="closing"><span class="closing-sun" aria-hidden="true">${icon('sun')}</span><p>${lines(t.closing)}</p></div>
 </main>${footer(lang, t)}
-<dialog class="lightbox" aria-label="${t.galleryLabel}"><div class="lightbox-inner"><button class="lightbox-close icon-button" aria-label="${t.galleryClose}" autofocus>${icon('close')}</button><img class="lightbox-image" alt="" width="1800" height="1201"><div class="lightbox-controls"><button class="lightbox-previous icon-button" aria-label="${t.galleryPrevious}">${icon('arrow')}</button><div class="lightbox-caption" aria-live="polite"><span data-caption></span><span data-counter></span></div><button class="lightbox-next icon-button" aria-label="${t.galleryNext}">${icon('arrow')}</button></div></div></dialog><script type="application/json" id="gallery-data">${JSON.stringify({ photos: galleryData, of: t.photoOf }).replaceAll('<', '\\u003c')}</script>`, versions);
+<dialog class="lightbox" aria-label="${t.galleryLabel}" aria-describedby="gallery-hint"><div class="lightbox-inner"><button class="lightbox-close icon-button" aria-label="${t.galleryClose}" autofocus>${icon('close')}</button><div class="lightbox-stage"><img class="lightbox-image" alt="" width="1800" height="1201" draggable="false"></div><div class="lightbox-controls"><button class="lightbox-previous icon-button" aria-label="${t.galleryPrevious}">${icon('arrow')}</button><div class="lightbox-caption" aria-live="polite"><span data-caption></span><span data-counter></span></div><button class="lightbox-next icon-button" aria-label="${t.galleryNext}">${icon('arrow')}</button></div><p class="lightbox-hint" id="gallery-hint">${escape(t.galleryHint)}</p></div></dialog><script type="application/json" id="gallery-data">${JSON.stringify({ photos: galleryData, of: t.photoOf }).replaceAll('<', '\\u003c')}</script>`, versions);
 }
 
 export function renderPrivacy(lang, versions) {

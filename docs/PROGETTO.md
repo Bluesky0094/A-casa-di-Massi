@@ -98,3 +98,15 @@ Su richiesta esplicita dell’utente, l’apertura alterna automaticamente le du
 L’utente ha approvato la versione più ricca di colori (`artifacts/adobe/side-house-rich-colours.png`) e chiesto di inserirla nel sito. Il sorgente di `casa-laterale` è ora `Used in website/IMG_8782-adobe-colour-match.png`; il RAW originale è stato riportato in `Foto Erika/IMG_8782.CR3` senza modificarlo. La versione Adobe è un PNG di 1800 px ottenuto dalla precedente derivata web: il processore Adobe non accetta CR3 e il trasferimento del TIFF a piena risoluzione è scaduto. Nessun ingrandimento artificiale. La versione chiara precedente resta solo come anteprima negli artefatti.
 
 Modifica Adobe non generativa, richiesta `03f17c6c-c210-42b1-95f4-214f35f6bbd4`: contrast 32, brightness 3, highlights -28, shadows -12, darks -10, vibrance 60, saturation 20, tempA 3, tempB 20, tempLuminance 50. Il generatore usa il PNG approvato per tutte le quattro varianti responsive, senza aggiungere altre correzioni cromatiche. Nessuna modifica al comportamento dello slideshow.
+
+## Foto, galleria e piccoli movimenti — 26 ottobre 2026
+
+La selezione visibile privilegia cucina, camera e cortile, con amaca ed esterno nella sezione all’aperto. Le otto immagini aggiuntive (soppalco, bagno, ingresso, cucina ampia, limoni, erbe, tavola e legnaia) restano nel pannello espandibile. Le 16 miniature della galleria non si ripetono nella pagina; tutte le 24 foto del sito rimangono utilizzate, senza modifiche ai sorgenti, al manifest o alle derivazioni WebP.
+
+Le foto apribili hanno un indicatore di ingrandimento. La galleria mantiene frecce, tastiera, Escape e ripristino del focus, aggiungendo scorrimento orizzontale con un dito. Movimenti verticali, brevi, annullati o con più dita non cambiano foto; lo zoom del browser resta disponibile. Il riquadro della foto mantiene dimensioni stabili durante il caricamento. Zoom delle miniature, dissolvenza della galleria e piccoli movimenti di pulsanti e navigazione rispettano la preferenza di movimento ridotto.
+
+Il testo iniziale IT/EN/ES presenta subito casa indipendente, quattro ospiti e Frigintini. Un collegamento alla disponibilità segue la galleria della casa e usa lo stesso annuncio Airbnb già presente nel sito, verificato nel settembre 2026; il tentativo di ricontrollo del 26 ottobre non ha restituito la pagina. Nessuna informazione pratica non confermata è stata aggiunta. Le modifiche sono locali, senza nuova pubblicazione.
+
+`scripts/verify-gallery.mjs` esercita gesti touch reali nel browser, tastiera, focus e movimento ridotto; si affianca ai controlli responsive e di ancoraggio esistenti.
+
+Il cambio lingua mantiene il percorso della pagina tradotta (home o privacy), senza copiare il frammento dell’ultima sezione visitata. Questo evita che un cambio lingua dall’intestazione faccia scorrere di nuovo la pagina verso una sezione ormai lasciata. I collegamenti espliciti alle sezioni conservano lo scorrimento fluido e l’allineamento a 24 px. La regressione è verificata in `scripts/verify-anchors.mjs` a 390, 768 e 1440 px.

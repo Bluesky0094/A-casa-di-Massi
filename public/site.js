@@ -17,16 +17,8 @@ document.addEventListener('click', (event) => {
   if (menu?.open && !menu.contains(event.target)) menu.open = false;
 });
 
-// Keep the current section when switching languages, including links opened in a new tab.
-function syncLanguageLinks() {
-  document.querySelectorAll('[data-language]').forEach((link) => {
-    const url = new URL(link.href);
-    url.hash = window.location.hash;
-    link.href = url.href;
-  });
-}
-syncLanguageLinks();
-window.addEventListener('hashchange', syncLanguageLinks);
+// Language links retain their translated page URL. A section fragment can be
+// stale after scrolling back to the header and must not trigger a new jump.
 
 const dialog = document.querySelector('.lightbox');
 const gallerySource = document.querySelector('#gallery-data');
@@ -34,13 +26,23 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
   const gallery = JSON.parse(gallerySource.textContent);
   const keys = Object.keys(gallery.photos);
   const image = dialog.querySelector('img');
+  const stage = dialog.querySelector('.lightbox-stage');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let index = 0;
   let trigger;
   let photoRequest = 0;
+  let photoMotion;
+  let swipe;
+
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) photoMotion?.cancel();
+  });
 
   function showPhoto(next) {
     index = (next + keys.length) % keys.length;
     const key = keys[index];
+    photoMotion?.cancel();
+    stage.setAttribute('aria-busy', 'true');
     // Changing src can leave the previous decoded bitmap on screen until loading finishes.
     image.style.visibility = 'hidden';
     image.alt = gallery.photos[key].alt;
@@ -50,12 +52,14 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
     image.decode().then(() => {
       if (request !== photoRequest || !dialog.open) return;
       image.style.visibility = 'visible';
-
+      stage.setAttribute('aria-busy', 'false');
+      if (!reduced.matches) photoMotion = image.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' });
     }).catch(() => {
       if (request !== photoRequest || !dialog.open) return;
       // Expose the current photo's alternative text, never an old bitmap, on failure.
       image.removeAttribute('src');
       image.style.visibility = 'visible';
+      stage.setAttribute('aria-busy', 'false');
     });
     dialog.querySelector('[data-caption]').textContent = gallery.photos[key].caption;
     dialog.querySelector('[data-counter]').textContent = `${index + 1} ${gallery.of} ${keys.length}`;
@@ -77,10 +81,37 @@ if (dialog && gallerySource && typeof dialog.showModal === 'function') {
   dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
   dialog.querySelector('.lightbox-previous').addEventListener('click', () => showPhoto(index - 1));
   dialog.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(index + 1));
+  // Leave vertical scrolling and pinch zoom to the browser; only deliberate,
+  // single-finger horizontal swipes advance the gallery.
+  stage.addEventListener('touchstart', (event) => {
+    const touch = event.touches[0];
+    swipe = event.touches.length === 1 && (window.visualViewport?.scale ?? 1) <= 1.05
+      ? { id: touch.identifier, x: touch.clientX, y: touch.clientY, time: performance.now() } : null;
+  }, { passive: true });
+  stage.addEventListener('touchmove', (event) => {
+    if (!swipe) return;
+    const touch = [...event.touches].find(touch => touch.identifier === swipe.id);
+    if (event.touches.length !== 1 || !touch || Math.abs(touch.clientY - swipe.y) > 40) swipe = null;
+  }, { passive: true });
+  stage.addEventListener('touchend', (event) => {
+    const start = swipe;
+    swipe = null;
+    if (!start || event.touches.length || !dialog.open) return;
+    const touch = [...event.changedTouches].find(touch => touch.identifier === start.id);
+    if (!touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && performance.now() - start.time < 900) {
+      showPhoto(index + (dx < 0 ? 1 : -1));
+    }
+  }, { passive: true });
+  stage.addEventListener('touchcancel', () => { swipe = null; }, { passive: true });
   dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
   dialog.addEventListener('close', () => {
     photoRequest++;
-
+    photoMotion?.cancel();
+    swipe = null;
+    stage.setAttribute('aria-busy', 'false');
     image.style.visibility = 'hidden';
     image.removeAttribute('src');
     trigger?.focus({ preventScroll: true });
