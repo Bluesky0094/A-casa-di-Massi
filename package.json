@@ -4,12 +4,17 @@
   "private": true,
   "type": "module",
   "description": "Sito statico trilingue di A casa di Massi",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "node scripts/server.mjs --watch",
     "build": "node scripts/build.mjs",
     "preview": "node scripts/server.mjs",
     "check": "node scripts/check.mjs",
     "images": "python3 scripts/prepare-images.py"
+  },
+  "devDependencies": {
+    "agent-browser": "^0.39.4"
   }
 }
