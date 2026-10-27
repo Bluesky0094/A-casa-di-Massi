@@ -4,3 +4,7 @@ node_modules/
 ._*
 *.log
 artifacts/
+
+# Keep the photo archive locally; track only the sources used by the website.
+/sources/Casa di Massi/*
+!/sources/Casa di Massi/Used in website/
