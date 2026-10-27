@@ -12,7 +12,6 @@ const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp
 const lines = (value) => escape(value).replaceAll('\n', '<br>');
 
 const icons = {
-  pause: '<path d="M8 5v14M16 5v14"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   diagonal: '<path d="M6 18 18 6M6 6h12v12"/>',
   down: '<path d="M12 4v16M6 14l6 6 6-6"/>',
@@ -75,7 +74,7 @@ export function renderHome(lang, versions) {
     <div class="hero-image" role="region" aria-label="${escape(t.heroSlider.label)}" data-hero-slider>
       <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}${photo('casa-laterale', t, { sizes: '(min-width: 900px) 60vw, 100vw', className: 'hero-side' })}</div></div>
       <div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span data-hero-caption data-first="${escape(t.heroCaption)}" data-second="${escape(t.heroSlider.sideCaption)}">${t.heroCaption}</span></div>
-      <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="off">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button><button type="button" data-hero-pause data-pause="${escape(t.heroSlider.pause)}" data-resume="${escape(t.heroSlider.resume)}" aria-label="${escape(t.heroSlider.pause)}">${icon('pause')}</button></div>
+      <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="polite">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button></div>
     </div>
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>
@@ -93,7 +92,7 @@ export function renderHome(lang, versions) {
       <figure class="memory-oven">${photo('forno', t, { sizes: '(min-width: 700px) 19vw, 35vw' })}<figcaption>${escape(t.captions.forno)}</figcaption></figure>
       <figure class="memory-dough">${photo('lievitazione', t, { sizes: '(min-width: 700px) 30vw, 65vw' })}<figcaption>${escape(t.captions.lievitazione)}</figcaption></figure>
     </div>
-    <div class="memory-narrative"><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div>
+    <div class="memory-narrative"><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><p class="memory-intro">${escape(t.storyIntro)}</p><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div>
       <div class="memory-keepsakes"><figure class="memory-house">${photo('pietra', t, { sizes: '(min-width: 700px) 24vw, 60vw' })}</figure><figure class="memory-bread">${photo('pane', t, { sizes: '(min-width: 700px) 18vw, 40vw' })}</figure></div>
     </div>
   </section>

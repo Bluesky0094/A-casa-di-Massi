@@ -349,3 +349,5 @@ figcaption>span:first-child{font-size:12px}
 @media(prefers-reduced-motion:reduce){.hero-track{transition:none}}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.family-memory .memory-intro{max-width:390px;margin-top:20px;line-height:1.8;color:var(--muted)}
