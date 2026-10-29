@@ -142,7 +142,7 @@ if (heroSlider) {
   const track = heroSlider.querySelector('.hero-track');
   const photos = [...track.querySelectorAll('img')];
   const controls = heroSlider.querySelector('.hero-controls');
-  const caption = heroSlider.querySelector('[data-hero-caption]');
+  const caption = heroSlider.closest('.hero').querySelector('[data-hero-caption]');
   const counter = heroSlider.querySelector('[data-hero-counter]');
   let current = 0;
   let requested = 0;

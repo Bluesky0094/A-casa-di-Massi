@@ -43,7 +43,7 @@ function header(lang, t, home = true) {
   return `<header class="header" id="inizio">
     <a class="wordmark" href="${route}" aria-label="A casa di Massi — ${lang === 'it' ? 'pagina iniziale' : lang === 'es' ? 'inicio' : 'home'}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a>
     <nav class="desktop-nav" aria-label="${t.navigation}">${nav}</nav>
-    <div class="header-actions">${languageNav(lang, t, home ? '' : 'privacy/')}${externalLink(bookingUrl, t.book, t, 'button header-book')}
+    <div class="header-actions">${languageNav(lang, t, home ? '' : 'privacy/')}
       <details class="mobile-menu"><summary aria-label="${t.menu}" data-open-label="${t.menu}" data-close-label="${t.closeMenu}"><span></span><span></span></summary><nav aria-label="${t.navigation}">${nav}${externalLink(bookingUrl, t.airbnb, t, 'mobile-book')}</nav></details>
     </div>
   </header>`;
@@ -70,12 +70,13 @@ export function renderHome(lang, versions) {
   return shell(lang, `${header(lang, t)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy"><p class="eyebrow"><span class="tiny-sun">${icon('sun')}</span>${t.eyebrow}</p><h1 id="hero-title">${t.hero[0]}<br><span>${t.hero[1]}</span></h1><p class="hero-description">${t.heroText}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a><div class="hero-bottom"><span>${t.heroNote}</span><a href="#benvenuti" class="scroll-cue" aria-label="${t.introLabel}">${icon('down')}</a></div></div>
+    <div class="hero-heading section-width"><h1 id="hero-title">${escape(t.hero[0])}<span>${escape(t.hero[1])}</span></h1><p class="hero-place">${escape(t.eyebrow)}</p></div>
     <div class="hero-image" role="region" aria-label="${escape(t.heroSlider.label)}" data-hero-slider>
-      <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '(min-width: 900px) 60vw, 100vw' })}${photo('casa-laterale', t, { sizes: '(min-width: 900px) 60vw, 100vw', className: 'hero-side' })}</div></div>
-      <div class="photo-note"><span>Frigintini, ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span data-hero-caption data-first="${escape(t.heroCaption)}" data-second="${escape(t.heroSlider.sideCaption)}">${t.heroCaption}</span></div>
+      <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '100vw' })}${photo('casa-laterale', t, { sizes: '100vw', className: 'hero-side' })}</div></div>
       <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="polite">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button></div>
     </div>
+    <div class="hero-caption section-width"><span data-hero-caption data-first="${escape(t.heroCaption)}" data-second="${escape(t.heroSlider.sideCaption)}">${escape(t.heroCaption)}</span><span>${escape(t.heroNote)}</span></div>
+    <div class="hero-copy section-width"><p class="hero-description">${escape(t.heroText)}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a>${externalLink(bookingUrl, t.airbnb, t, 'text-link hero-book')}</div>
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>
   <section class="house section-width section-space" id="casa" aria-labelledby="house-title">
