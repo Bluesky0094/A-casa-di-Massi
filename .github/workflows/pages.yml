@@ -27,7 +27,7 @@ jobs:
         run: npm run build && npm run check
       - name: Build and check public site
         env:
-          SITE_URL: ${{ steps.pages.outputs.base_url }}/
+          SITE_URL: https://acasadimassi.it/
         run: npm run build && npm run check
       - uses: actions/upload-pages-artifact@v4
         with:
