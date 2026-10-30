@@ -105,7 +105,7 @@ export function renderHome(lang, versions) {
 
 export function renderPrivacy(lang, versions) {
   const t = content[lang];
-  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${t.privacyText}</p><p>${externalLink('https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement', 'GitHub General Privacy Statement', t, 'text-link')}</p><a class="text-link" href="${sitePath(languages[lang].path)}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi` });
+  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${t.privacyText}</p><p>${externalLink('https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement', 'GitHub General Privacy Statement', t, 'text-link')}</p><a class="text-link" href="${sitePath(languages[lang].path)}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi`, description: t.privacyDescription });
 }
 
 export function render404(versions) {
