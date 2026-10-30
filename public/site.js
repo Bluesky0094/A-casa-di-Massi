@@ -142,7 +142,6 @@ if (heroSlider) {
   const track = heroSlider.querySelector('.hero-track');
   const photos = [...track.querySelectorAll('img')];
   const controls = heroSlider.querySelector('.hero-controls');
-  const caption = heroSlider.closest('.hero').querySelector('[data-hero-caption]');
   const counter = heroSlider.querySelector('[data-hero-counter]');
   let current = 0;
   let requested = 0;
@@ -156,7 +155,6 @@ if (heroSlider) {
     current = target;
     track.style.transform = `translateX(-${current * 100}%)`;
     photos.forEach((photo, i) => photo.setAttribute('aria-hidden', String(i !== current)));
-    caption.textContent = current ? caption.dataset.second : caption.dataset.first;
     counter.textContent = `${current + 1} / ${photos.length}`;
   }
   heroSlider.querySelector('[data-hero-previous]').addEventListener('click', () => show(requested - 1));

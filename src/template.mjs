@@ -75,7 +75,6 @@ export function renderHome(lang, versions) {
       <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '100vw' })}${photo('casa-laterale', t, { sizes: '100vw', className: 'hero-side' })}</div></div>
       <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="polite">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button></div>
     </div>
-    <div class="hero-caption section-width"><span data-hero-caption data-first="${escape(t.heroCaption)}" data-second="${escape(t.heroSlider.sideCaption)}">${escape(t.heroCaption)}</span><span>${escape(t.heroNote)}</span></div>
     <div class="hero-copy section-width"><p class="hero-description">${escape(t.heroText)}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a>${externalLink(bookingUrl, t.airbnb, t, 'text-link hero-book')}</div>
   </section>
   <section class="intro section-width" id="benvenuti" aria-labelledby="intro-title"><div><p class="eyebrow">${t.introLabel}</p><h2 id="intro-title">${lines(t.intro)}</h2></div><p>${t.introText}</p></section>

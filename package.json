@@ -11,8 +11,7 @@
     "dev": "node scripts/server.mjs --watch",
     "build": "node scripts/build.mjs",
     "preview": "node scripts/server.mjs",
-    "check": "node scripts/check.mjs",
-    "images": "python3 scripts/prepare-images.py"
+    "check": "node scripts/check.mjs"
   },
   "devDependencies": {
     "agent-browser": "^0.39.4"

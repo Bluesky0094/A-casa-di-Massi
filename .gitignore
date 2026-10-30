@@ -5,6 +5,17 @@ node_modules/
 *.log
 artifacts/
 
-# Keep the photo archive locally; track only the sources used by the website.
-/sources/Casa di Massi/*
-!/sources/Casa di Massi/Used in website/
+# Local project material and original photographs are kept offline.
+/sources/
+/docs/
+/.impeccable/
+/output/
+/AGENT.md
+/DESIGN.md
+/PRODUCT.md
+/PROMPT_INIZIALE.md
+/.fiveserverrc
+/scripts/prepare-images.py
+/scripts/verify-anchors.mjs
+/scripts/verify-browser.mjs
+/scripts/verify-gallery.mjs

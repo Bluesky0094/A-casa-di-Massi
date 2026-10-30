@@ -1,10 +1,12 @@
 # A casa di Massi
 
-Sito in italiano, inglese e spagnolo. HTML statico, CSS e JavaScript essenziale, generati con Node.js senza dipendenze npm. Navigazione, testi, cambio lingua e foto funzionano anche senza JavaScript; JavaScript aggiunge la galleria modale e piccoli miglioramenti di navigazione.
+Sito in italiano, inglese e spagnolo. HTML statico, CSS e JavaScript essenziale, generati con Node.js senza dipendenze di build o runtime. Navigazione, testi, cambio lingua e collegamenti alle foto funzionano anche senza JavaScript; JavaScript aggiunge la galleria modale, lo scorrimento manuale delle foto iniziali e piccoli miglioramenti di navigazione.
+
+La ricomposizione locale del 29 ottobre 2026 segue una direzione calda e personale: fotografia della casa in apertura, accoglienza di Massi, quattro viste pratiche degli spazi, ricordo familiare e vita all’aperto. Titoli in Lora e testi in DM Sans, entrambi serviti localmente. I 24 sorgenti fotografici e le loro varianti restano utilizzati; cambia la disposizione. Questa descrizione non attesta verifiche completate o una nuova pubblicazione.
 
 ## Avvio
 
-Richiede Node.js 22 o successivo. Non serve `npm install`.
+Richiede Node.js 22 o successivo. Per sviluppo, build e controlli statici non serve `npm install`; `agent-browser` è una dipendenza di sviluppo per gli strumenti di verifica nel browser.
 
 ```sh
 npm run dev
@@ -37,22 +39,21 @@ Servi `dist/` come radice: aprire `/dist/index.html` da un server avviato sulla 
 ## File principali
 
 - `src/content.mjs`: contenuti e testi alternativi nelle tre lingue.
-- `src/template.mjs`: HTML condiviso; collegamento Airbnb verificato.
+- `src/template.mjs`: HTML condiviso; collegamento Airbnb verificato nel settembre 2026.
 - `public/styles.css`: stili responsive.
 - `public/site.js`: menu mobile e galleria accessibile da tastiera.
 - `public/images/`: fotografie WebP ottimizzate.
+- `public/fonts/`: font locali e licenze; Lora Latin variabile pesa 37.788 byte e usa la licenza SIL OFL 1.1.
 - `src/images.json`: manifest delle immagini derivate e dei rispettivi originali.
-- `scripts/prepare-images.py`: rigenerazione delle foto (`npm run images`, richiede Pillow).
-- `docs/PROGETTO.md`: direzione visiva, fonti, selezione fotografica e preparazione alla pubblicazione.
-- `docs/VERIFICHE.md`: verifiche sulla prima versione.
+- Le fotografie originali, gli appunti di progetto e lo script per rigenerare le immagini sono conservati offline, separatamente dai file necessari alla build.
 
-Le pagine sono `/`, `/en/`, `/es/`, con una pagina privacy per ciascuna lingua e una pagina 404. Le lingue hanno URL propri, attributi `lang` e collegamenti `hreflang`; il cambio lingua conserva la sezione corrente quando JavaScript è attivo. La galleria si usa anche con frecce, Tab ed Esc.
+Le pagine sono `/`, `/en/`, `/es/`, con una pagina privacy per ciascuna lingua e una pagina 404. Le lingue hanno URL propri, attributi `lang` e collegamenti `hreflang`; il cambio lingua apre la pagina tradotta senza riprendere il frammento di una sezione visitata in precedenza. La galleria si usa anche con frecce, Tab ed Esc.
 
 Il server serve solo `dist/`: documenti di lavoro e fotografie originali non vengono esposti. Non ci sono analytics, cookie, iframe, moduli, prenotazioni interne o font caricati da servizi esterni.
 
 ## Pubblicazione su GitHub Pages
 
-Indirizzo pubblico: **https://bluesky0094.github.io/A-casa-di-Massi/**.
+Indirizzo pubblico configurato: [A casa di Massi](https://bluesky0094.github.io/A-casa-di-Massi/). Le modifiche locali non sono automaticamente presenti su questo indirizzo.
 
 Ogni push su `main` avvia `.github/workflows/pages.yml`: Node.js 22 genera e verifica prima la versione locale, poi quella pubblica, e pubblica esclusivamente `dist/`. Si può avviare anche da Actions → Deploy GitHub Pages → Run workflow. In Settings → Pages, la sorgente deve essere GitHub Actions.
 
@@ -65,4 +66,4 @@ SITE_URL=https://bluesky0094.github.io/A-casa-di-Massi/ npm run check
 
 Senza `SITE_URL`, sviluppo e anteprima restano sulla radice `/` e non indicizzabili. La build pubblica contiene canonical, alternate assoluti, immagine social, sitemap e indicizzazione abilitata; la pagina 404 resta `noindex`. `npm run dev` ripristina la build locale. Le fotografie originali e i documenti di lavoro non entrano nell’artefatto Pages (il repository GitHub è pubblico).
 
-Per un futuro dominio personalizzato, configurarlo in GitHub Pages: il workflow userà il nuovo URL alla successiva esecuzione. Dettagli di rilascio in `docs/PROGETTO.md`.
+Per un futuro dominio personalizzato, configurarlo in GitHub Pages: il workflow userà il nuovo URL alla successiva esecuzione.

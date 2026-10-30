@@ -8,8 +8,9 @@ import { siteUrl, basePath, sitePath, absoluteUrl } from '../src/site.mjs';
 const dist = resolve(root, 'dist');
 const imageSources = JSON.parse(await readFile(resolve(root, 'src/images.json'), 'utf8'));
 for (const [name, image] of Object.entries(imageSources)) {
-  assert.equal(resolve(root, image.source, '..'), resolve(root, 'sources/Casa di Massi/Used in website'), `Source collection: ${name}`);
-  await access(resolve(root, image.source));
+  for (const variant of image.variants) {
+    await access(resolve(dist, 'images', `${name}-${variant.width}.webp`));
+  }
 }
 
 let links = 0;
@@ -75,7 +76,7 @@ for (const [route, html] of htmlByRoute) {
     images++;
   }
 }
-for (const font of ['dm-sans']) {
+for (const font of ['dm-sans', 'lora-latin']) {
   const bytes = await readFile(resolve(dist, 'fonts', `${font}.woff2`));
   assert.equal(bytes.subarray(0,4).toString(), 'wOF2', `Valid WOFF2: ${font}`);
 }
@@ -87,4 +88,4 @@ if (siteUrl) {
   for (const route of routes.filter(route => route !== '/404.html')) assert(sitemap.includes(`<loc>${absoluteUrl(route)}</loc>`), `Sitemap route: ${route}`);
   assert(!sitemap.includes('404.html'), '404 is excluded from sitemap');
 }
-console.log(`Controlli superati: 7 pagine, 3 lingue, ${links} link, ${images} immagini responsive, 1 font locale.`);
+console.log(`Controlli superati: 7 pagine, 3 lingue, ${links} link, ${images} immagini responsive, 2 font locali.`);
