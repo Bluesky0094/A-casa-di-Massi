@@ -321,7 +321,7 @@ figcaption>span:first-child{font-size:12px}
 .memory-oven img{height:auto}
 .memory-dough{position:absolute;width:65%;right:-3%;bottom:0;border:10px solid var(--paper);background:var(--paper)}
 .memory-dough img{height:auto}
-.memory-workbench figcaption{font-size:12px;line-height:1.4;margin-top:10px;color:var(--muted)}
+.memory-workbench figcaption{font-size:12px;line-height:1.4;padding-top:12px;margin-top:0;color:var(--muted)}
 .memory-making figcaption{max-width:48%}
 .memory-narrative{padding-top:0}
 .family-memory .memory-copy h2{font-size:clamp(38px,4vw,58px);line-height:1.08}
@@ -333,7 +333,7 @@ figcaption>span:first-child{font-size:12px}
 .memory-bread{position:absolute;width:46%;right:0;bottom:0;border:8px solid var(--paper);border-right:0;border-bottom:0}
 .memory-bread img{aspect-ratio:1.15;object-position:48% 50%}
 @media(min-width:700px) and (max-width:1000px){.family-memory{gap:6%}.memory-workbench{padding-bottom:65px}.memory-oven{top:20px}.memory-dough{border-width:6px}.family-memory .memory-copy h2{font-size:38px}.family-memory .memory-quote p{font-size:15px}.memory-keepsakes{margin-top:35px}.memory-narrative{padding-top:0}}
-@media(max-width:699px){.family-memory{display:flex;flex-direction:column;gap:38px}.memory-narrative{display:contents}.family-memory .memory-copy{order:0}.family-memory .memory-copy h2{font-size:42px}.family-memory .memory-quote{margin-top:22px}.family-memory .memory-quote p{font-size:16px}.memory-workbench{order:1;width:100%;padding-bottom:60px}.memory-oven{top:25px}.memory-dough{right:-1%;border-width:6px}.memory-keepsakes{order:2;width:85%;margin-top:0;align-self:center}.memory-workbench figcaption{font-size:11px}}
+@media(max-width:699px){.family-memory{display:flex;flex-direction:column;gap:38px}.memory-narrative{display:contents}.family-memory .memory-copy{order:0}.family-memory .memory-copy h2{font-size:42px}.family-memory .memory-quote{margin-top:22px}.family-memory .memory-quote p{font-size:16px}.memory-workbench{order:1;width:100%;padding-bottom:60px}.memory-oven{top:25px}.memory-dough{right:-1%;border-width:6px}.memory-keepsakes{order:2;width:85%;margin-top:0;align-self:center}.memory-workbench figcaption{font-size:11px;padding-top:10px}}
 
 /* Two outdoor views; the remaining details stay in the expandable gallery. */
 .outdoor-story{margin-top:65px;padding-top:45px;border-top:1px solid var(--line)}
@@ -360,8 +360,6 @@ figcaption>span:first-child{font-size:12px}
 @media(prefers-reduced-motion:reduce){.hero-track{transition:none}}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-.family-memory .memory-intro{max-width:390px;margin-top:20px;line-height:1.8;color:var(--muted)}
 
 /* Photographic hero */
 .hero{display:block;min-height:0}

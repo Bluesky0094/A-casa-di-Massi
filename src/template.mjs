@@ -97,7 +97,7 @@ export function renderHome(lang, versions) {
       <figure class="memory-oven">${photo('forno', t, { sizes: '(min-width: 700px) 19vw, 35vw' })}<figcaption>${escape(t.captions.forno)}</figcaption></figure>
       <figure class="memory-dough">${photo('lievitazione', t, { sizes: '(min-width: 700px) 30vw, 65vw' })}<figcaption>${escape(t.captions.lievitazione)}</figcaption></figure>
     </div>
-    <div class="memory-narrative"><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><p class="memory-intro">${escape(t.storyIntro)}</p><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div>
+    <div class="memory-narrative"><div class="memory-copy"><p class="eyebrow">${t.storyLabel}</p><h2 id="memory-title">${lines(t.storyTitle)}</h2><blockquote class="memory-quote"><p>«${escape(t.storyText)}»</p><footer>— Massi</footer></blockquote></div>
       <div class="memory-keepsakes"><figure class="memory-house">${photo('pietra', t, { sizes: '(min-width: 700px) 24vw, 60vw' })}</figure><figure class="memory-bread">${photo('pane', t, { sizes: '(min-width: 700px) 18vw, 40vw' })}</figure></div>
     </div>
   </section>
