@@ -10,6 +10,11 @@ const outdoorPhotos = ['amaca', 'esterno'];
 const galleryPhotos = ['soppalco', 'bagno', 'casa', 'cucina-ampia', 'limoni', 'erbe', 'tavola', 'giardino'];
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const lines = (value) => escape(value).replaceAll('\n', '<br>');
+const consentText = {
+  it: { title: 'Cookie di analisi', text: 'Con il tuo consenso usiamo Google Analytics per capire come viene visitato il sito. Puoi rifiutare o cambiare scelta in qualsiasi momento.', accept: 'Accetta', reject: 'Rifiuta', settings: 'Preferenze cookie', more: 'Informativa privacy', privacy: 'Con il tuo consenso, Google Analytics raccoglie informazioni sulle visite e sui clic sui link esterni, usando cookie e identificatori. Usiamo questi dati per comprendere l’utilizzo del sito. Puoi accettare, rifiutare o revocare il consenso dalle preferenze cookie. La scelta viene conservata per sei mesi su questo dispositivo. Google tratta i dati secondo la propria informativa. Per domande sulla privacy: acasadimassi@gmail.com.' },
+  en: { title: 'Analytics cookies', text: 'With your consent, we use Google Analytics to understand how people visit the site. You can refuse or change your choice at any time.', accept: 'Accept', reject: 'Reject', settings: 'Cookie preferences', more: 'Privacy notice', privacy: 'With your consent, Google Analytics collects information about visits and clicks on external links using cookies and identifiers. We use this information to understand how the site is used. You can accept, reject or withdraw consent in cookie preferences. Your choice is stored on this device for six months. Google processes data under its own privacy policy. Privacy questions: acasadimassi@gmail.com.' },
+  es: { title: 'Cookies de análisis', text: 'Con tu consentimiento usamos Google Analytics para entender cómo se visita el sitio. Puedes rechazar o cambiar tu elección en cualquier momento.', accept: 'Aceptar', reject: 'Rechazar', settings: 'Preferencias de cookies', more: 'Aviso de privacidad', privacy: 'Con tu consentimiento, Google Analytics recopila información sobre las visitas y los clics en enlaces externos mediante cookies e identificadores. Usamos estos datos para entender cómo se utiliza el sitio. Puedes aceptar, rechazar o retirar tu consentimiento en las preferencias de cookies. Tu elección se guarda en este dispositivo durante seis meses. Google trata los datos según su propia política de privacidad. Consultas de privacidad: acasadimassi@gmail.com.' },
+};
 
 const icons = {
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
@@ -50,7 +55,7 @@ function header(lang, t, home = true) {
 }
 
 function footer(lang, t) {
-  return `<footer class="footer"><div class="footer-main"><a class="wordmark" href="${sitePath(languages[lang].path)}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a><p>${t.footer}</p><a class="back-top" href="#inizio">${t.top}${icon('down')}</a></div><div class="footer-bottom"><span>© 2026 A casa di Massi</span><span>Frigintini · Modica · ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>CIN IT088006C2S3KDESX8</span><a href="${sitePath(languages[lang].path + 'privacy/')}">${t.privacy}</a></div></footer>`;
+  return `<footer class="footer"><div class="footer-main"><a class="wordmark" href="${sitePath(languages[lang].path)}">a casa di <span>Massi<span class="wordmark-dot">.</span></span></a><p>${t.footer}</p><a class="back-top" href="#inizio">${t.top}${icon('down')}</a></div><div class="footer-bottom"><span>© 2026 A casa di Massi</span><span>Frigintini · Modica · ${lang === 'en' ? 'Sicily' : 'Sicilia'}</span><span>CIN IT088006C2S3KDESX8</span><a href="${sitePath(languages[lang].path + 'privacy/')}">${t.privacy}</a><button class="cookie-settings" type="button" data-cookie-settings hidden>${escape(consentText[lang].settings)}</button></div></footer>`;
 }
 
 function shell(lang, body, { css, js, page = '', title, description, notFound = false } = {}) {
@@ -61,7 +66,7 @@ function shell(lang, body, { css, js, page = '', title, description, notFound = 
 ${!notFound ? Object.entries(languages).map(([code, data]) => `<link rel="alternate" hreflang="${code}" href="${absoluteUrl(data.path + page)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${absoluteUrl('/' + page)}">` : ''}
 ${siteUrl && !notFound ? `<link rel="canonical" href="${absoluteUrl(languages[lang].path + page)}"><meta property="og:url" content="${absoluteUrl(languages[lang].path + page)}"><meta property="og:image" content="${absoluteUrl('/images/apertura-1200.webp')}"><meta property="og:image:alt" content="${escape(t.alt.apertura)}">` : ''}
 <link rel="icon" type="image/svg+xml" href="${sitePath('/favicon.svg')}"><link rel="preload" href="${sitePath('/fonts/dm-sans.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="${sitePath('/styles.css')}?v=${css}"><script src="${sitePath('/site.js')}?v=${js}" defer></script></head>
-<body><a class="skip-link" href="#main">${t.skip}</a>${body}</body></html>`;
+<body><a class="skip-link" href="#main">${t.skip}</a>${body}${!notFound ? `<section class="cookie-banner" aria-label="${escape(consentText[lang].title)}" data-cookie-banner hidden><div><strong>${escape(consentText[lang].title)}</strong><p>${escape(consentText[lang].text)} <a href="${sitePath(languages[lang].path + 'privacy/')}">${escape(consentText[lang].more)}</a></p></div><div class="cookie-actions"><button type="button" data-cookie-reject>${escape(consentText[lang].reject)}</button><button type="button" data-cookie-accept>${escape(consentText[lang].accept)}</button></div></section>` : ''}</body></html>`;
 }
 
 export function renderHome(lang, versions) {
@@ -105,7 +110,7 @@ export function renderHome(lang, versions) {
 
 export function renderPrivacy(lang, versions) {
   const t = content[lang];
-  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${t.privacyText}</p><p>${externalLink('https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement', 'GitHub General Privacy Statement', t, 'text-link')}</p><a class="text-link" href="${sitePath(languages[lang].path)}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi`, description: t.privacyDescription });
+  return shell(lang, `${header(lang, t, false)}<main id="main" class="text-page section-width"><p class="eyebrow">${t.privacy}</p><h1>${t.privacyTitle}</h1><p>${escape(consentText[lang].privacy)}</p><p>${escape(t.privacyText)}</p><p>${externalLink('https://policies.google.com/privacy', 'Google Privacy Policy', t, 'text-link')}</p><p>${externalLink('https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement', 'GitHub General Privacy Statement', t, 'text-link')}</p><a class="text-link" href="${sitePath(languages[lang].path)}">${t.backHome}${icon('arrow')}</a></main>${footer(lang, t)}`, { ...versions, page: 'privacy/', title: `${t.privacy} — A casa di Massi`, description: t.privacyDescription });
 }
 
 export function render404(versions) {

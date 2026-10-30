@@ -12,6 +12,12 @@ button{font:inherit;color:inherit}
 button,summary{cursor:pointer}
 button{border:0}
 button:disabled{cursor:default}
+[hidden]{display:none!important}
+.cookie-settings{background:none;padding:0;text-decoration:underline;text-underline-offset:3px;font-size:inherit}
+.cookie-banner{position:fixed;z-index:90;bottom:16px;left:50%;transform:translateX(-50%);width:min(850px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;display:flex;align-items:center;gap:24px;padding:20px 24px;background:var(--white);color:var(--ink);border:1px solid var(--ink);box-shadow:0 8px 30px #0003}
+.cookie-banner strong{font-size:16px}.cookie-banner p{margin-top:4px;line-height:1.5}.cookie-banner a{text-decoration:underline;text-underline-offset:3px}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0}.cookie-actions button{min-height:44px;padding:10px 18px;border:1px solid var(--ink);background:var(--white);font-weight:600}.cookie-actions button:hover{background:var(--pale)}
+@media(max-width:699px){.cookie-banner{flex-direction:column;align-items:stretch;gap:14px;padding:18px}.cookie-actions button{flex:1}}
 img{display:block;width:100%;height:auto;object-fit:cover}
 figure,p,h1,h2,h3,ul{margin:0}
 ul{list-style:none;padding:0}
