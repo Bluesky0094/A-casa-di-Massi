@@ -143,6 +143,7 @@ if (heroSlider) {
   const photos = [...track.querySelectorAll('img')];
   const controls = heroSlider.querySelector('.hero-controls');
   const counter = heroSlider.querySelector('[data-hero-counter]');
+  const dots = [...heroSlider.querySelectorAll('.hero-dots span')];
   let current = 0;
   let requested = 0;
   let request = 0;
@@ -156,7 +157,32 @@ if (heroSlider) {
     track.style.transform = `translateX(-${current * 100}%)`;
     photos.forEach((photo, i) => photo.setAttribute('aria-hidden', String(i !== current)));
     counter.textContent = `${current + 1} / ${photos.length}`;
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current));
   }
+  let heroSwipe = null;
+  heroSlider.addEventListener('touchstart', (event) => {
+    const touch = event.touches[0];
+    heroSwipe = event.touches.length === 1 && (window.visualViewport?.scale ?? 1) <= 1.05
+      ? { id: touch.identifier, x: touch.clientX, y: touch.clientY, time: performance.now() } : null;
+  }, { passive: true });
+  heroSlider.addEventListener('touchmove', (event) => {
+    if (!heroSwipe) return;
+    const touch = [...event.touches].find(item => item.identifier === heroSwipe.id);
+    if (event.touches.length !== 1 || !touch || Math.abs(touch.clientY - heroSwipe.y) > 40) heroSwipe = null;
+  }, { passive: true });
+  heroSlider.addEventListener('touchend', (event) => {
+    const start = heroSwipe;
+    heroSwipe = null;
+    if (!start || event.touches.length) return;
+    const touch = [...event.changedTouches].find(item => item.identifier === start.id);
+    if (!touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && performance.now() - start.time < 900) {
+      show(requested + (dx < 0 ? 1 : -1));
+    }
+  }, { passive: true });
+  heroSlider.addEventListener('touchcancel', () => { heroSwipe = null; }, { passive: true });
   heroSlider.querySelector('[data-hero-previous]').addEventListener('click', () => show(requested - 1));
   heroSlider.querySelector('[data-hero-next]').addEventListener('click', () => show(requested + 1));
   photos[1].setAttribute('aria-hidden', 'true');

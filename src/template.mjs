@@ -73,7 +73,7 @@ export function renderHome(lang, versions) {
     <h1 id="hero-title" class="sr-only">${escape(t.hero[0])} ${escape(t.hero[1])}</h1>
     <div class="hero-image" role="region" aria-label="${escape(t.heroSlider.label)}" data-hero-slider>
       <div class="hero-viewport"><div class="hero-track">${photo('apertura', t, { hero: true, sizes: '100vw' })}${photo('casa-laterale', t, { sizes: '100vw', className: 'hero-side' })}</div></div>
-      <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span data-hero-counter aria-live="polite">1 / 2</span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button></div>
+      <div class="hero-controls" hidden><button type="button" data-hero-previous aria-label="${escape(t.heroSlider.previous)}">${icon('arrow')}</button><span class="sr-only" data-hero-counter aria-live="polite">1 / 2</span><span class="hero-dots" aria-hidden="true"><span class="is-active"></span><span></span></span><button type="button" data-hero-next aria-label="${escape(t.heroSlider.next)}">${icon('arrow')}</button></div>
     </div>
     <div class="hero-copy section-width"><p class="hero-description">${escape(t.heroText)}</p><a class="button button-dark" href="#casa">${t.discover}${icon('arrow')}</a>${externalLink(bookingUrl, t.airbnb, t, 'text-link hero-book')}</div>
   </section>
